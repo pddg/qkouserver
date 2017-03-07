@@ -17,7 +17,7 @@
 
 ## ドキュメント
 
-github pagesを参照．
+[github pages](https://pddg.github.io/qkouserver/index.html)を参照．
 
 ## ライセンス
 
