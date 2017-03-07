@@ -1,0 +1,583 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>static.pyの各変数について · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.2">
+        
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="bot/" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.2" data-path="STATIC.html">
+            
+                <a href="STATIC.html">
+            
+                    
+                    static.pyの各変数について
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="divider"></li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="bot/">
+            
+                <a href="bot/">
+            
+                    
+                    About
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="bot/ENVIRONMENT.html">
+            
+                <a href="bot/ENVIRONMENT.html">
+            
+                    
+                    環境構築
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.2.1" data-path="bot/ENVIRONMENT.html">
+            
+                <a href="bot/ENVIRONMENT.html#開発環境の構築">
+            
+                    
+                    開発環境の構築
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2.2" data-path="bot/ENVIRONMENT.html">
+            
+                <a href="bot/ENVIRONMENT.html#運用環境の構築">
+            
+                    
+                    運用環境の構築
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="bot/USAGE.html">
+            
+                <a href="bot/USAGE.html">
+            
+                    
+                    起動・運用
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.3.1" data-path="bot/USAGE.html">
+            
+                <a href="bot/USAGE.html#更新通知botとして起動">
+            
+                    
+                    更新通知botとして起動
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3.2" data-path="bot/USAGE.html">
+            
+                <a href="bot/USAGE.html#UserStreamを処理するbotとして起動">
+            
+                    
+                    UserStreamを処理するbotとして起動
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+        
+        <li class="divider"></li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="FAQ.html">
+            
+                <a href="FAQ.html">
+            
+                    
+                    FAQ
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2" >
+            
+                <a target="_blank" href="https://twitter.com/pudding_info">
+            
+                    
+                    Contact
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >static.pyの各変数について</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="staticpy">static.py</h1>
+<p>QkouServer&#x306E;&#x30EB;&#x30FC;&#x30C8;&#x30C7;&#x30A3;&#x30EC;&#x30AF;&#x30C8;&#x30EA;&#x306B;&#x5B58;&#x5728;&#x3059;&#x308B;&#x5404;&#x7A2E;&#x8A2D;&#x5B9A;&#x9805;&#x76EE;&#x306E;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3067;&#x3059;&#xFF0E;</p>
+<!-- toc -->
+<ul>
+<li><a href="#&#x5171;&#x901A;&#x9805;&#x76EE;">&#x5171;&#x901A;&#x9805;&#x76EE;</a><ul>
+<li><a href="#&#x30C7;&#x30A3;&#x30EC;&#x30AF;&#x30C8;&#x30EA;">&#x30C7;&#x30A3;&#x30EC;&#x30AF;&#x30C8;&#x30EA;</a></li>
+<li><a href="#mysql">MySQL</a></li>
+<li><a href="#models">models</a><ul>
+<li><a href="#&#x5171;&#x901A;&#x9805;&#x76EE;">&#x5171;&#x901A;&#x9805;&#x76EE;</a></li>
+<li><a href="#modelsinfo"><code>models.Info</code></a></li>
+<li><a href="#modelscancel"><code>models.Cancel</code></a></li>
+<li><a href="#modelsnews"><code>models.News</code></a></li>
+<li><a href="#modelssevererrorlog"><code>models.SeverErrorLog</code></a></li>
+</ul>
+</li>
+<li><a href="#&#x305D;&#x306E;&#x4ED6;">&#x305D;&#x306E;&#x4ED6;</a></li>
+</ul>
+</li>
+<li><a href="#bot&#x6A5F;&#x80FD;&#x95A2;&#x9023;&#x9805;&#x76EE;">Bot&#x6A5F;&#x80FD;&#x95A2;&#x9023;&#x9805;&#x76EE;</a><ul>
+<li><a href="#twitter">Twitter</a></li>
+<li><a href="#shibboleth&#x8A8D;&#x8A3C;">Shibboleth&#x8A8D;&#x8A3C;</a></li>
+<li><a href="#url">URL</a></li>
+<li><a href="#s&#x30B7;&#x30E9;&#x30D0;&#x30B9;s"><s>&#x30B7;&#x30E9;&#x30D0;&#x30B9;</s></a></li>
+<li><a href="#&#x5B9A;&#x671F;&#x66F4;&#x65B0;&#x30D7;&#x30ED;&#x30BB;&#x30B9;">&#x5B9A;&#x671F;&#x66F4;&#x65B0;&#x30D7;&#x30ED;&#x30BB;&#x30B9;</a></li>
+<li><a href="#&#x30B9;&#x30C8;&#x30EA;&#x30FC;&#x30E0;&#x51E6;&#x7406;&#x30D7;&#x30ED;&#x30BB;&#x30B9;">&#x30B9;&#x30C8;&#x30EA;&#x30FC;&#x30E0;&#x51E6;&#x7406;&#x30D7;&#x30ED;&#x30BB;&#x30B9;</a></li>
+</ul>
+</li>
+</ul>
+<!-- toc stop -->
+<h2 id="&#x5171;&#x901A;&#x9805;&#x76EE;">&#x5171;&#x901A;&#x9805;&#x76EE;</h2>
+<h3 id="&#x30C7;&#x30A3;&#x30EC;&#x30AF;&#x30C8;&#x30EA;">&#x30C7;&#x30A3;&#x30EC;&#x30AF;&#x30C8;&#x30EA;</h3>
+<ul>
+<li><code>BASE_DIR</code> : QkouServer&#x30C7;&#x30A3;&#x30EC;&#x30AF;&#x30C8;&#x30EA;&#x307E;&#x3067;&#x306E;&#x7D76;&#x5BFE;&#x30D1;&#x30B9;&#xFF0E;</li>
+<li><code>PRJ_DIR</code> : QkouServer&#x30C7;&#x30A3;&#x30EC;&#x30AF;&#x30C8;&#x30EA;&#x306E;&#x3042;&#x308B;&#x30C7;&#x30A3;&#x30EC;&#x30AF;&#x30C8;&#x30EA;&#x307E;&#x3067;&#x306E;&#x7D76;&#x5BFE;&#x30D1;&#x30B9;&#xFF0E;&#x73FE;&#x5728;&#x4F7F;&#x7528;&#x3057;&#x3066;&#x3044;&#x306A;&#x3044;&#xFF0E;</li>
+<li><code>SQLITE_DIR_PATH</code> : SQLite&#x306E;&#x30C7;&#x30FC;&#x30BF;&#x30D9;&#x30FC;&#x30B9;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3092;&#x683C;&#x7D0D;&#x3059;&#x308B;&#x30C7;&#x30A3;&#x30EC;&#x30AF;&#x30C8;&#x30EA;&#x3078;&#x306E;&#x30D1;&#x30B9;&#xFF0E;&#xFF0E;&#x30C7;&#x30D5;&#x30A9;&#x30EB;&#x30C8;&#x306F;<code>BASE_DIR</code>&#xFF0E;&#x74B0;&#x5883;&#x5909;&#x6570;<code>SQLITE_DIR_PATH</code>&#x306B;&#x5BFE;&#x5FDC;&#xFF0E;</li>
+<li><code>SQLITE_PATH</code> : SQLite&#x306E;&#x30C7;&#x30FC;&#x30BF;&#x30D9;&#x30FC;&#x30B9;&#x3092;&#x4F5C;&#x88FD;&#x3059;&#x308B;&#x5834;&#x6240;&#x3092;<code>SQLITE_DIR_PATH</code>&#x3092;&#x5143;&#x306B;&#x6307;&#x5B9A;&#x3057;&#x3066;&#x3044;&#x308B;&#xFF0E;</li>
+</ul>
+<h3 id="mysql">MySQL</h3>
+<ul>
+<li><code>USE_MYSQL</code> : MySQL&#x3092;&#x4F7F;&#x7528;&#x3059;&#x308B;&#x304B;&#x3069;&#x3046;&#x304B;&#xFF0E;&#x30C7;&#x30D5;&#x30A9;&#x30EB;&#x30C8;&#x306F;<code>False</code>&#xFF0E;&#x74B0;&#x5883;&#x5909;&#x6570;<code>USE_MYSQL</code>&#x306B;&#x5BFE;&#x5FDC;&#xFF0E;</li>
+<li><code>MYSQL_USERNAME</code> : MySQL&#x306E;&#x30E6;&#x30FC;&#x30B6;&#x540D;&#xFF0E;&#x74B0;&#x5883;&#x5909;&#x6570;<code>MYSQL_USERNAME</code>&#x306B;&#x5BFE;&#x5FDC;&#xFF0E;</li>
+<li><code>MYSQL_PASSWORD</code> : MySQL&#x306E;&#x30ED;&#x30B0;&#x30A4;&#x30F3;&#x30D1;&#x30B9;&#x30EF;&#x30FC;&#x30C9;&#xFF0E;&#x74B0;&#x5883;&#x5909;&#x6570;<code>MYSQL_PASSWORD</code>&#x306B;&#x5BFE;&#x5FDC;&#xFF0E;</li>
+<li><code>MYSQL_HOST</code> : MySQL&#x30B5;&#x30FC;&#x30D0;&#x306E;&#x30DB;&#x30B9;&#x30C8;&#x540D;&#xFF0E;&#x74B0;&#x5883;&#x5909;&#x6570;<code>MYSQL_HOST</code>&#x306B;&#x5BFE;&#x5FDC;&#xFF0E;</li>
+<li><code>MYSQL_DATABASE_NAME</code> : MySQL&#x4E0A;&#x306E;&#x30C7;&#x30FC;&#x30BF;&#x30D9;&#x30FC;&#x30B9;&#x306E;&#x540D;&#x524D;&#xFF0E;&#x74B0;&#x5883;&#x5909;&#x6570;<code>MYSQL_DATABASE_NAME</code>&#x306B;&#x5BFE;&#x5FDC;&#xFF0E;</li>
+<li><code>MYSQL_PATH</code> : &#x4E0A;&#x8A18;&#x306E;&#x5909;&#x6570;&#x304B;&#x3089;&#x751F;&#x6210;&#x3055;&#x308C;&#x305F;MySQL&#x3078;&#x306E;&#x30D1;&#x30B9;&#x306E;&#x6587;&#x5B57;&#x5217;&#xFF0E;&#x3069;&#x308C;&#x304B;&#x4E00;&#x3064;&#x3067;&#x3082;&#x304B;&#x3051;&#x3066;&#x3044;&#x308B;&#x5834;&#x5408;<code>None</code>&#x3068;&#x306A;&#x308A;&#xFF0C;&#x4EE3;&#x308F;&#x308A;&#x306B;&#x81EA;&#x52D5;&#x7684;&#x306B;<code>SQLITE_PATH</code>&#x304C;&#x7528;&#x3044;&#x3089;&#x308C;&#x308B;&#xFF0E;</li>
+</ul>
+<h3 id="models">models</h3>
+<p>&#x30C6;&#x30F3;&#x30D7;&#x30EC;&#x30FC;&#x30C8;&#x6587;&#x5B57;&#x5217;&#x306E;&#x4FEE;&#x6B63;&#x306F;&#x591A;&#x304F;&#x306E;&#x5834;&#x5408;&#xFF0C;&#x30AF;&#x30E9;&#x30B9;&#x306E;<code>__str__()</code>&#x30E1;&#x30BD;&#x30C3;&#x30C9;&#x306E;&#x6539;&#x5909;&#x304C;&#x5FC5;&#x8981;&#x3068;&#x306A;&#x308A;&#x307E;&#x3059;&#xFF0E;</p>
+<h4 id="&#x5171;&#x901A;&#x9805;&#x76EE;">&#x5171;&#x901A;&#x9805;&#x76EE;</h4>
+<ul>
+<li><code>UNDEFINED</code> : &#x5B66;&#x52D9;&#x8AB2;&#x63B2;&#x8F09;&#x60C5;&#x5831;&#x306B;&#x304A;&#x3044;&#x3066;&#x5024;&#x306E;&#x8A18;&#x8F09;&#x304C;&#x306A;&#x3044;&#x3082;&#x306E;&#xFF0E;&#x30C7;&#x30D5;&#x30A9;&#x30EB;&#x30C8;&#x306F;&quot;-&quot;&#xFF0E;</li>
+<li><code>UNKNOWN</code> : &#x30D7;&#x30ED;&#x30B0;&#x30E9;&#x30E0;&#x306E;&#x4ED5;&#x69D8;&#x4E0A;&#xFF0C;&#x6E80;&#x305F;&#x3059;&#x3053;&#x3068;&#x306E;&#x51FA;&#x6765;&#x306A;&#x3044;&#x9805;&#x76EE;&#x3092;&#x57CB;&#x3081;&#x308B;&#x5024;&#xFF0E;&#x30C7;&#x30D5;&#x30A9;&#x30EB;&#x30C8;&#x306F;&quot;&#x4E0D;&#x660E;&quot;&#xFF0E;</li>
+<li><code>INTENSIVE</code> : &#x96C6;&#x4E2D;&#x8B1B;&#x7FA9;&#x306E;&#x66DC;&#x65E5;&#x9805;&#x76EE;&#x3092;&#x6E80;&#x305F;&#x3059;&#x5024;&#xFF0E;&#x30C7;&#x30D5;&#x30A9;&#x30EB;&#x30C8;&#x306F;&quot;&#x96C6;&#x4E2D;&quot;</li>
+</ul>
+<h4 id="modelsinfo"><code>models.Info</code></h4>
+<ul>
+<li><code>LEC_INFO_ID_TEMPLATE</code> : &#x30C4;&#x30A4;&#x30FC;&#x30C8;&#x6642;&#x306B;&#x4ED8;&#x52A0;&#x3055;&#x308C;&#x308B;&#x30CF;&#x30C3;&#x30B7;&#x30E5;&#x30BF;&#x30B0;&#xFF0E;&#x30C7;&#x30D5;&#x30A9;&#x30EB;&#x30C8;&#x306F;&quot; #lec{id}&quot;&#xFF0E;</li>
+<li><code>LEC_INFO_TEMPLATE</code> : &#x6587;&#x5B57;&#x5217;&#x5316;&#x6642;&#x306E;&#x30C6;&#x30F3;&#x30D7;&#x30EC;&#x30FC;&#x30C8;&#xFF0E;&#x30C7;&#x30D5;&#x30A9;&#x30EB;&#x30C8;&#x306F;&#x4EE5;&#x4E0B;&#xFF0E;</li>
+</ul>
+<pre><code class="lang-text">&#x8B1B;&#x7FA9;&#x540D;&#xFF1A;{subject}
+&#x8B1B;&#x5E2B;&#x540D;&#xFF1A;{teacher}
+&#x6642;&#x9650;&#xFF1A;{week} {period}&#x9650;
+&#x6982;&#x8981;&#xFF1A;{abstract}
+&#x8A73;&#x7D30;&#xFF1A;{detail}
+</code></pre>
+<h4 id="modelscancel"><code>models.Cancel</code></h4>
+<ul>
+<li><code>LEC_CANCEL_ID_TEMPLATE</code> : &#x30C4;&#x30A4;&#x30FC;&#x30C8;&#x6642;&#x306B;&#x4ED8;&#x52A0;&#x3055;&#x308C;&#x308B;&#x30CF;&#x30C3;&#x30B7;&#x30E5;&#x30BF;&#x30B0;&#xFF0E;&#x30C7;&#x30D5;&#x30A9;&#x30EB;&#x30C8;&#x306F;&quot; #cancel{id}&quot;</li>
+<li><code>LEC_CANCEL_TEMPLATE</code> : &#x6587;&#x5B57;&#x5217;&#x5316;&#x6642;&#x306E;&#x30C6;&#x30F3;&#x30D7;&#x30EC;&#x30FC;&#x30C8;&#xFF0E;&#x30C7;&#x30D5;&#x30A9;&#x30EB;&#x30C8;&#x306F;&#x4EE5;&#x4E0B;&#xFF0E;</li>
+</ul>
+<pre><code class="lang-text">&#x8B1B;&#x7FA9;&#x540D;&#xFF1A;{subject}
+&#x8B1B;&#x5E2B;&#x540D;&#xFF1A;{teacher}
+&#x4F11;&#x8B1B;&#x65E5;&#xFF1A;{str_day}
+&#x6642;&#x9650;&#xFF1A;{week} {period}&#x9650;
+&#x6982;&#x8981;&#xFF1A;{abstract}
+</code></pre>
+<h4 id="modelsnews"><code>models.News</code></h4>
+<ul>
+<li><code>NEWS_ID_TEMPLATE</code> : &#x30C4;&#x30A4;&#x30FC;&#x30C8;&#x6642;&#x306B;&#x4ED8;&#x52A0;&#x3055;&#x308C;&#x308B;&#x30CF;&#x30C3;&#x30B7;&#x30E5;&#x30BF;&#x30B0;&#xFF0E;&#x30C7;&#x30D5;&#x30A9;&#x30EB;&#x30C8;&#x306F;&quot; #news{id}&quot;</li>
+<li><code>NEWS_TEMPLATE_WITH_LINK</code> : &#x30EA;&#x30F3;&#x30AF;&#x304C;&#x6587;&#x4E2D;&#x306B;&#x5B58;&#x5728;&#x3057;&#x305F;&#x5834;&#x5408;&#x306E;&#x6587;&#x5B57;&#x5217;&#x5316;&#x6642;&#x306E;&#x30C6;&#x30F3;&#x30D7;&#x30EC;&#x30FC;&#x30C8;&#xFF0E;&#x30C7;&#x30D5;&#x30A9;&#x30EB;&#x30C8;&#x306F;&#x4EE5;&#x4E0B;&#xFF0E;</li>
+</ul>
+<pre><code class="lang-text">&#x63B2;&#x8F09;&#x65E5;&#xFF1A;{str_first}
+&#x8A73;&#x7D30;&#xFF1A;{detail}
+&#x30EA;&#x30F3;&#x30AF;&#xFF1A;{link}
+</code></pre>
+<ul>
+<li><code>NEWS_TEMPLATE_WITHOUT_LINK</code> : &#x30EA;&#x30F3;&#x30AF;&#x304C;&#x6587;&#x4E2D;&#x306B;&#x5B58;&#x5728;&#x3057;&#x306A;&#x3044;&#x5834;&#x5408;&#x306E;&#x6587;&#x5B57;&#x5217;&#x5316;&#x6642;&#x306E;&#x30C6;&#x30F3;&#x30D7;&#x30EC;&#x30FC;&#x30C8;&#xFF0E;&#x30C7;&#x30D5;&#x30A9;&#x30EB;&#x30C8;&#x306F;&#x4EE5;&#x4E0B;&#xFF0E;</li>
+</ul>
+<pre><code class="lang-text">&#x63B2;&#x8F09;&#x65E5;&#xFF1A;{str_first}
+&#x8A73;&#x7D30;&#xFF1A;{detail}
+</code></pre>
+<h4 id="modelssevererrorlog"><code>models.SeverErrorLog</code></h4>
+<ul>
+<li><code>LOGIN_FAILURE_START_MSG</code> : &#x969C;&#x5BB3;&#x767A;&#x751F;&#x6642;&#x306E;&#x30E1;&#x30C3;&#x30BB;&#x30FC;&#x30B8;&#x30C6;&#x30F3;&#x30D7;&#x30EC;&#x30FC;&#x30C8;&#xFF0E;&#x30C7;&#x30D5;&#x30A9;&#x30EB;&#x30C8;&#x306F;&#x4EE5;&#x4E0B;&#xFF0E;</li>
+</ul>
+<pre><code class="lang-text">[&#x969C;&#x5BB3;&#x691C;&#x77E5;]
+&#x969C;&#x5BB3;&#x691C;&#x77E5;&#x6642;&#x523B;&#xFF1A;{created_at}
+&#x73FE;&#x5728;&#xFF0C;&#x5B66;&#x52D9;&#x8AB2;&#x30DB;&#x30FC;&#x30E0;&#x30DA;&#x30FC;&#x30B8;&#x3078;&#x306E;&#x30ED;&#x30B0;&#x30A4;&#x30F3;&#x304C;&#x3067;&#x304D;&#x306A;&#x3044;&#xFF0C;&#x307E;&#x305F;&#x306F;&#x60C5;&#x5831;&#x304C;&#x6B63;&#x5E38;&#x306B;&#x53D6;&#x5F97;&#x3067;&#x304D;&#x306A;&#x3044;&#x30A8;&#x30E9;&#x30FC;&#x304C;&#x767A;&#x751F;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#xFF0E;
+</code></pre>
+<ul>
+<li><code>LOGIN_FAILURE_CONTINUE_MSG</code> : &#x969C;&#x5BB3;&#x7D99;&#x7D9A;&#x6642;&#x306E;&#x30E1;&#x30C3;&#x30BB;&#x30FC;&#x30B8;&#x30C6;&#x30F3;&#x30D7;&#x30EC;&#x30FC;&#x30C8;&#xFF0E;&#x30C7;&#x30D5;&#x30A9;&#x30EB;&#x30C8;&#x306F;&#x4EE5;&#x4E0B;&#xFF0E;</li>
+</ul>
+<pre><code class="lang-text">[&#x969C;&#x5BB3;&#x7D99;&#x7D9A;&#x4E2D;]
+&#x969C;&#x5BB3;&#x691C;&#x77E5;&#x6642;&#x523B;: {created_at}
+&#x6700;&#x7D42;&#x78BA;&#x8A8D;&#x6642;&#x523B;: {last_confirmed}
+&#x5B66;&#x52D9;&#x8AB2;&#x30DB;&#x30FC;&#x30E0;&#x30DA;&#x30FC;&#x30B8;&#x3078;&#x30ED;&#x30B0;&#x30A4;&#x30F3;&#x3067;&#x304D;&#x306A;&#x3044;&#xFF0C;&#x307E;&#x305F;&#x306F;&#x60C5;&#x5831;&#x304C;&#x6B63;&#x5E38;&#x306B;&#x53D6;&#x5F97;&#x3067;&#x304D;&#x306A;&#x3044;&#x30A8;&#x30E9;&#x30FC;&#x304C;&#x7D99;&#x7D9A;&#x4E2D;&#x3067;&#x3059;&#xFF0E;
+</code></pre>
+<ul>
+<li><code>LOGIN_FAILURE_END_MSG</code> : &#x969C;&#x5BB3;&#x5FA9;&#x65E7;&#x6642;&#x306E;&#x30E1;&#x30C3;&#x30BB;&#x30FC;&#x30B8;&#x30C6;&#x30F3;&#x30D7;&#x30EC;&#x30FC;&#x30C8;&#xFF0E;&#x30C7;&#x30D5;&#x30A9;&#x30EB;&#x30C8;&#x306F;&#x4EE5;&#x4E0B;&#xFF0E;</li>
+</ul>
+<pre><code class="lang-text">[&#x969C;&#x5BB3;&#x5FA9;&#x65E7;]
+&#x969C;&#x5BB3;&#x691C;&#x77E5;&#x6642;&#x523B;: {created_at}
+&#x5FA9;&#x65E7;&#x78BA;&#x8A8D;&#x6642;&#x523B;: {fixed_at}
+&quot;&#x5B66;&#x52D9;&#x8AB2;&#x30DB;&#x30FC;&#x30E0;&#x30DA;&#x30FC;&#x30B8;&#x3078;&#x306E;&#x30ED;&#x30B0;&#x30A4;&#x30F3;&#x53CA;&#x3073;&#x60C5;&#x5831;&#x306E;&#x53D6;&#x5F97;&#x306B;&#x6210;&#x529F;&#x3057;&#x307E;&#x3057;&#x305F;&#xFF0E;
+</code></pre>
+<h3 id="&#x305D;&#x306E;&#x4ED6;">&#x305D;&#x306E;&#x4ED6;</h3>
+<ul>
+<li><code>TESTING</code> : &#x30C6;&#x30B9;&#x30C8;&#x5B9F;&#x884C;&#x3067;&#x3042;&#x308B;&#x3053;&#x3068;&#x3092;&#x793A;&#x3059;&#x30D5;&#x30E9;&#x30B0;&#xFF0E;&#x74B0;&#x5883;&#x5909;&#x6570;<code>TESTING</code>&#x306B;&#x5BFE;&#x5FDC;&#xFF0E;&#x30C7;&#x30D5;&#x30A9;&#x30EB;&#x30C8;&#x306F;<code>False</code>&#xFF0E;
+&#x3053;&#x306E;&#x30D5;&#x30E9;&#x30B0;&#x3092;&#x5EFA;&#x3066;&#x308B;&#x3068;<code>Ctrl + C</code>&#x3067;&#x7D42;&#x4E86;&#x6642;&#x306B;&#x30C7;&#x30FC;&#x30BF;&#x30D9;&#x30FC;&#x30B9;&#x306E;&#x4E2D;&#x8EAB;&#x3092;&#x6D88;&#x53BB;&#x3059;&#x308B;&#xFF0E;</li>
+</ul>
+<h2 id="bot&#x6A5F;&#x80FD;&#x95A2;&#x9023;&#x9805;&#x76EE;">Bot&#x6A5F;&#x80FD;&#x95A2;&#x9023;&#x9805;&#x76EE;</h2>
+<h3 id="twitter">Twitter</h3>
+<p>Bot&#x3068;&#x3057;&#x3066;&#x3064;&#x3076;&#x3084;&#x304F;&#x305F;&#x3081;&#x306B;&#x5FC5;&#x9808;&#x306A;&#x9805;&#x76EE;&#xFF0E;&#x73FE;&#x5728;&#xFF0C;&#x3064;&#x3076;&#x3084;&#x304D;&#x3092;&#x6709;&#x52B9;&#x306B;&#x3057;&#x306A;&#x3044;&#x5834;&#x5408;&#x3067;&#x3082;&#x5FC5;&#x9808;&#xFF08;&#x8981;&#x6539;&#x5584;&#xFF09;&#xFF0E;</p>
+<ul>
+<li><code>CONSUMER_KEY</code> : Twitter App&#x306E;&#x30B3;&#x30F3;&#x30B7;&#x30E5;&#x30FC;&#x30DE;&#x30FC;&#x30AD;&#x30FC;&#xFF0E;&#x74B0;&#x5883;&#x5909;&#x6570;<code>CONSUMER_KEY</code>&#x306B;&#x5BFE;&#x5FDC;&#xFF0E;</li>
+<li><code>CONSUMER_SECRET</code> : Twitter App&#x306E;&#x30B3;&#x30F3;&#x30B7;&#x30E5;&#x30FC;&#x30DE;&#x30FC;&#x30B7;&#x30FC;&#x30AF;&#x30EC;&#x30C3;&#x30C8;&#xFF0E;&#x74B0;&#x5883;&#x5909;&#x6570;<code>CONSUMER_SECRET</code>&#x306B;&#x5BFE;&#x5FDC;&#xFF0E;</li>
+<li><code>ACCESS_TOKEN</code> : Twitter App&#x306E;&#x30A2;&#x30AF;&#x30BB;&#x30B9;&#x30C8;&#x30FC;&#x30AF;&#x30F3;&#xFF0E;&#x74B0;&#x5883;&#x5909;&#x6570;<code>ACCESS_TOKEN</code>&#x306B;&#x5BFE;&#x5FDC;&#xFF0E;</li>
+<li><code>ACCESS_SECRET</code> : Twitter App&#x306E;&#x30A2;&#x30AF;&#x30BB;&#x30B9;&#x30B7;&#x30FC;&#x30AF;&#x30EC;&#x30C3;&#x30C8;&#xFF0E;&#x74B0;&#x5883;&#x5909;&#x6570;<code>ACCESS_SECRET</code>&#x306B;&#x5BFE;&#x5FDC;&#xFF0E;</li>
+</ul>
+<h3 id="shibboleth&#x8A8D;&#x8A3C;">Shibboleth&#x8A8D;&#x8A3C;</h3>
+<p>&#x5B66;&#x52D9;&#x8AB2;web&#x30B5;&#x30A4;&#x30C8;&#x306B;&#x30ED;&#x30B0;&#x30A4;&#x30F3;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E;&#x30E6;&#x30FC;&#x30B6;&#x540D;&#x3068;&#x30D1;&#x30B9;&#x30EF;&#x30FC;&#x30C9;&#xFF0E;&#x30C7;&#x30FC;&#x30BF;&#x53D6;&#x5F97;&#x306B;&#x5FC5;&#x9808;&#xFF0E;</p>
+<ul>
+<li><code>SHIBBOLETH_USERNAME</code> : &#x30E6;&#x30FC;&#x30B6;&#x540D;&#xFF0E;&#x74B0;&#x5883;&#x5909;&#x6570;<code>SHIBBOLETH_USERNAME</code>&#x306B;&#x5BFE;&#x5FDC;&#xFF0E;</li>
+<li><code>SHIBBOLETH_PASSWORD</code> : &#x30D1;&#x30B9;&#x30EF;&#x30FC;&#x30C9;&#xFF0E;&#x74B0;&#x5883;&#x5909;&#x6570;<code>SHIBBOLETH_PASSWORD</code>&#x306B;&#x5BFE;&#x5FDC;&#xFF0E;</li>
+</ul>
+<h3 id="url">URL</h3>
+<ul>
+<li><s><code>SYLLABUS_URL</code> : &#x30B7;&#x30E9;&#x30D0;&#x30B9;&#x306E;URL&#xFF0E;&quot;<a href="http://www.syllabus.kit.ac.jp/" target="_blank">http://www.syllabus.kit.ac.jp/</a>&quot;</s></li>
+<li><code>LEC_INFO_URL</code> : &#x6388;&#x696D;&#x95A2;&#x4FC2;&#x9023;&#x7D61;&#x306E;URL&#xFF0E;&quot;<a href="https://portal.student.kit.ac.jp/?c=lecture_information" target="_blank">https://portal.student.kit.ac.jp/?c=lecture_information</a>&quot;</li>
+<li><code>LEC_CANCEL_URL</code> : &#x4F11;&#x8B1B;&#x60C5;&#x5831;&#x306E;URL&#xFF0E;&quot;<a href="https://portal.student.kit.ac.jp/?c=lecture_cancellation" target="_blank">https://portal.student.kit.ac.jp/?c=lecture_cancellation</a>&quot;</li>
+<li><code>NEWS_URL</code> : &#x6700;&#x65B0;&#x60C5;&#x5831;&#x306E;URL&#xFF0E;&quot;<a href="https://portal.student.kit.ac.jp/?c=news" target="_blank">https://portal.student.kit.ac.jp/?c=news</a>&quot;</li>
+</ul>
+<h3 id="&#x30B7;&#x30E9;&#x30D0;&#x30B9;"><s>&#x30B7;&#x30E9;&#x30D0;&#x30B9;</s></h3>
+<ul>
+<li><p><s><code>EXCEPTION_TITLES</code> : &#x30B7;&#x30E9;&#x30D0;&#x30B9;&#x306E;&#x79D1;&#x76EE;&#x540D;&#x306E;&#x547D;&#x540D;&#x898F;&#x5247;&#x306E;&#x4F8B;&#x5916;&#xFF0E;&#x901A;&#x5E38;&#x30AF;&#x30E9;&#x30B9;&#x540D;&#x304C;&#x79D1;&#x76EE;&#x540D;&#x306E;&#x5F8C;&#x308D;&#x306B;&#x4ED8;&#x3051;&#x3089;&#x308C;&#x308B;&#x304C;&#xFF0C;&#x82F1;&#x8A9E;&#x30BF;&#x30A4;&#x30C8;&#x30EB;&#x306E;&#x79D1;&#x76EE;&#x540D;&#x3067;&#x306F;&#x534A;&#x89D2;&#x30B9;&#x30DA;&#x30FC;&#x30B9;&#x3092;&#x631F;&#x3080;&#xFF0E;</s></p>
+<pre><code class="lang-python">[<span class="hljs-string">&quot;English&quot;</span>, <span class="hljs-string">&quot;Reading&quot;</span>, <span class="hljs-string">&quot;Writing&quot;</span>, <span class="hljs-string">&quot;Basic&quot;</span>, <span class="hljs-string">&quot;Speaking&quot;</span>, <span class="hljs-string">&quot;Learning&quot;</span>,
+<span class="hljs-string">&quot;Advanced&quot;</span>, <span class="hljs-string">&quot;Intermediate&quot;</span>, <span class="hljs-string">&quot;Acquisition&quot;</span>, <span class="hljs-string">&quot;Communication&quot;</span>]
+</code></pre>
+</li>
+<li><p><s><code>EXPIRE_ON</code> : &#x30B7;&#x30E9;&#x30D0;&#x30B9;&#x30C7;&#x30FC;&#x30BF;&#x306E;&#x66F4;&#x65B0;&#x983B;&#x5EA6;&#xFF0E;&#x6570;&#x5B57;&#x3067;&#x6307;&#x5B9A;&#xFF0E;30&#x3092;&#x6307;&#x5B9A;&#x3059;&#x308B;&#x3068;30&#x65E5;&#x306B;&#x4E00;&#x56DE;&#x30C7;&#x30FC;&#x30BF;&#x3092;&#x66F4;&#x65B0;&#x3059;&#x308B;&#xFF0E;</s></p>
+</li>
+</ul>
+<h3 id="&#x5B9A;&#x671F;&#x66F4;&#x65B0;&#x30D7;&#x30ED;&#x30BB;&#x30B9;">&#x5B9A;&#x671F;&#x66F4;&#x65B0;&#x30D7;&#x30ED;&#x30BB;&#x30B9;</h3>
+<ul>
+<li><code>SCRAPING_INTERVAL</code> : &#x30C7;&#x30FC;&#x30BF;&#x53D6;&#x5F97;&#x306E;&#x9593;&#x9694;&#x306E;&#x6700;&#x4F4E;&#x5024;&#xFF08;&#x79D2;&#xFF09;&#xFF0E;&#x5B9F;&#x969B;&#x306B;&#x306F;&#x3053;&#x308C;&#x306B;&#x51E6;&#x7406;&#x6642;&#x9593;&#x304C;&#x8DB3;&#x3055;&#x308C;&#x308B;&#xFF0E;&#x74B0;&#x5883;&#x5909;&#x6570;<code>SCRAPING_INTERVAL</code>&#x306B;&#x5BFE;&#x5FDC;&#xFF0E;&#x30C7;&#x30D5;&#x30A9;&#x30EB;&#x30C8;&#x306F;300&#xFF0E;</li>
+<li><code>LOGIN_FAILURE_TWEET_INTERVAL</code> : &#x30ED;&#x30B0;&#x30A4;&#x30F3;&#x8A66;&#x884C;&#x306B;&#x5931;&#x6557;&#x3057;&#x305F;&#x3068;&#x304D;&#xFF0C;&#x691C;&#x77E5;&#x6642;&#x3068;&#x5FA9;&#x65E7;&#x6642;&#x4EE5;&#x5916;&#xFF0C;&#x969C;&#x5BB3;&#x304C;&#x7D99;&#x7D9A;&#x3057;&#x3066;&#x3044;&#x308B;&#x3068;&#x304D;&#x306B;&#x4F55;&#x5206;&#x304A;&#x304D;&#x306B;&#x30C4;&#x30A4;&#x30FC;&#x30C8;&#x3092;&#x884C;&#x3046;&#x304B;&#x306E;&#x9593;&#x9694;&#xFF08;&#x79D2;&#xFF09;&#xFF0E;
+&#x74B0;&#x5883;&#x5909;&#x6570;<code>LOGIN_FAILURE_TWEET_INTERVAL</code>&#x306B;&#x5BFE;&#x5FDC;&#xFF0E;&#x30C7;&#x30D5;&#x30A9;&#x30EB;&#x30C8;&#x306F;1800&#xFF0E;</li>
+<li><code>DAILY_TWEET_HOUR</code> : &#x672C;&#x65E5;&#x306E;&#x4F11;&#x8B1B;&#x30C4;&#x30A4;&#x30FC;&#x30C8;&#x3092;&#x3059;&#x308B;&#x6642;&#x9593;&#x3092;&#x6570;&#x5024;&#x3067;&#x6307;&#x5B9A;&#xFF0E;7&#x306A;&#x3089;&#x3070;7&#x6642;&#x306B;&#x30C4;&#x30A4;&#x30FC;&#x30C8;&#x3092;&#x884C;&#x3046;&#xFF0E;&#x74B0;&#x5883;&#x5909;&#x6570;<code>DAILY_TWEET_HOUR</code>&#x306B;&#x5BFE;&#x5FDC;&#xFF0E;&#x30C7;&#x30D5;&#x30A9;&#x30EB;&#x30C8;&#x306F;7&#xFF0E;</li>
+<li><code>TODAY_CANCEL_TEMPLATE</code> : &#x672C;&#x65E5;&#x306E;&#x4F11;&#x8B1B;&#x30C4;&#x30A4;&#x30FC;&#x30C8;&#x306E;&#x30C6;&#x30F3;&#x30D7;&#x30EC;&#x30FC;&#x30C8;&#x6587;&#x5B57;&#x5217;&#xFF0E;</li>
+</ul>
+<pre><code class="lang-text">{date} &#x672C;&#x65E5;&#x306E;&#x4F11;&#x8B1B;
+{titles}&quot;
+</code></pre>
+<ul>
+<li><code>TODAY_CANCEL_TEMPLATE_CONTINUE</code> : &#x4E00;&#x3064;&#x306E;&#x672C;&#x65E5;&#x306E;&#x4F11;&#x8B1B;&#x30C4;&#x30A4;&#x30FC;&#x30C8;&#x306B;&#x53CE;&#x307E;&#x308A;&#x304D;&#x3089;&#x306A;&#x304B;&#x3063;&#x305F;&#x5834;&#x5408;&#x306B;&#x7D9A;&#x3051;&#x3066;&#x30C4;&#x30A4;&#x30FC;&#x30C8;&#x3055;&#x308C;&#x308B;&#x5834;&#x5408;&#x306E;&#x30C6;&#x30F3;&#x30D7;&#x30EC;&#x30FC;&#x30C8;&#x6587;&#x5B57;&#x5217;&#xFF0E;</li>
+</ul>
+<pre><code class="lang-text">{date} &#x672C;&#x65E5;&#x306E;&#x4F11;&#x8B1B; &#x7D9A;&#x304D;
+{titles}
+</code></pre>
+<ul>
+<li><code>TODAY_IS_HOLIDAY_TEMPLATE</code>  : &#x795D;&#x65E5;&#x3067;&#x3042;&#x3063;&#x305F;&#x5834;&#x5408;&#xFF0C;&#x4F11;&#x8B1B;&#x60C5;&#x5831;&#x3067;&#x306F;&#x306A;&#x304F;&#x4F55;&#x306E;&#x65E5;&#x3067;&#x3042;&#x308B;&#x304B;&#x3092;&#x30C4;&#x30A4;&#x30FC;&#x30C8;&#x3059;&#x308B;&#xFF0E;</li>
+</ul>
+<pre><code class="lang-text">{date} &#x4ECA;&#x65E5;&#x306F;{holiday_name}&#x306E;&#x65E5;&#x3067;&#x3059;&#xFF0E;{msg}
+</code></pre>
+<ul>
+<li><code>HOLIDAY_MSG_ARRAY</code> : &#x795D;&#x65E5;&#x3067;&#x3042;&#x3063;&#x305F;&#x5834;&#x5408;&#x306E;&#x8FFD;&#x52A0;&#x306E;&#x30E1;&#x30C3;&#x30BB;&#x30FC;&#x30B8;&#xFF0E;&#x3053;&#x306E;&#x4E2D;&#x304B;&#x3089;&#x30E9;&#x30F3;&#x30C0;&#x30E0;&#x306B;&#x4E00;&#x3064;&#x9078;&#x3070;&#x308C;&#x308B;&#xFF0E;</li>
+</ul>
+<pre><code class="lang-python">[<span class="hljs-string">&quot;&#x30EC;&#x30DD;&#x30FC;&#x30C8;&#x3084;&#x8AB2;&#x984C;&#x306F;&#x7D42;&#x308F;&#x308A;&#x307E;&#x3057;&#x305F;&#x304B;&#xFF1F;&#x6709;&#x610F;&#x7FA9;&#x306A;&#x795D;&#x65E5;&#x3092;&#x304A;&#x904E;&#x3054;&#x3057;&#x304F;&#x3060;&#x3055;&#x3044;&#xFF0E;&quot;</span>,
+<span class="hljs-string">&quot;&#x9032;&#x6357;&#x3069;&#x3046;&#x3067;&#x3059;&#x304B;&#xFF1F;&quot;</span>,
+<span class="hljs-string">&quot;&#x4ECA;&#x65E5;&#x304F;&#x3089;&#x3044;&#x306F;&#x3053;&#x306E;bot&#x3082;&#x304A;&#x4F11;&#x307F;&#x3092;&#x3044;&#x305F;&#x3060;&#x3044;&#x3066;&#x3082;&#x826F;&#x3044;&#x3067;&#x3059;&#x304B;&#xFF1F;&#x307E;&#x3041;&#x30C0;&#x30E1;&#x3067;&#x3059;&#x3088;&#x306D;&#xFF0E;&quot;</span>,
+<span class="hljs-string">&quot;&#x3068;&#x3053;&#x308D;&#x3067;&#x3053;&#x306E;bot&#x306F;Python&#x3068;&#x3044;&#x3046;&#x30D7;&#x30ED;&#x30B0;&#x30E9;&#x30DF;&#x30F3;&#x30B0;&#x8A00;&#x8A9E;&#x3067;&#x66F8;&#x304B;&#x308C;&#x3066;&#x3044;&#x307E;&#x3059;&#xFF0E;&#x305B;&#x3063;&#x304B;&#x304F;&#x306E;&#x4F11;&#x65E5;&#x3067;&#x3059;&#x3057;&#x65B0;&#x3057;&#x3044;&#x3053;&#x3068;&#x3092;&#x59CB;&#x3081;&#x3066;&#x307F;&#x3066;&#x306F;&#xFF1F;&quot;</span>]
+</code></pre>
+<h3 id="&#x30B9;&#x30C8;&#x30EA;&#x30FC;&#x30E0;&#x51E6;&#x7406;&#x30D7;&#x30ED;&#x30BB;&#x30B9;">&#x30B9;&#x30C8;&#x30EA;&#x30FC;&#x30E0;&#x51E6;&#x7406;&#x30D7;&#x30ED;&#x30BB;&#x30B9;</h3>
+<ul>
+<li><code>REPLY_ACTION_REGEX</code> : &#x53CD;&#x5FDC;&#x3059;&#x308B;&#x30EA;&#x30D7;&#x30E9;&#x30A4;&#x3092;&#x62BD;&#x51FA;&#x3059;&#x308B;&#x6B63;&#x898F;&#x8868;&#x73FE;</li>
+</ul>
+<pre><code class="lang-text">&quot;.*(&#x8A73;&#x3057;|&#x304F;&#x308F;&#x3057;).*&quot;
+</code></pre>
+<ul>
+<li><code>THERE_IS_NO_INFORMATION_MSG</code> : &#x554F;&#x3044;&#x5408;&#x308F;&#x305B;&#x305F;&#x60C5;&#x5831;&#x306E;<code>is_deleted</code>&#x304C;<code>True</code>&#x3067;&#x3042;&#x3063;&#x305F;&#x5834;&#x5408;&#xFF0C;&#x53C8;&#x306F;&#x554F;&#x3044;&#x5408;&#x308F;&#x305B;&#x5185;&#x5BB9;&#x304C;&#x5B58;&#x5728;&#x3057;&#x306A;&#x304B;&#x3063;&#x305F;&#x5834;&#x5408;&#x306B;&#x8FD4;&#x3055;&#x308C;&#x308B;&#x30E1;&#x30C3;&#x30BB;&#x30FC;&#x30B8;&#xFF0E;</li>
+</ul>
+<pre><code class="lang-text">&#x304A;&#x554F;&#x3044;&#x5408;&#x308F;&#x305B;&#x3055;&#x308C;&#x305F;&#x60C5;&#x5831;&#x306F;&#x73FE;&#x5728;&#x5B58;&#x5728;&#x3057;&#x307E;&#x305B;&#x3093;&#xFF0E;
+</code></pre>
+<ul>
+<li><code>DATABASE_ERROR_MSG</code> : &#x554F;&#x3044;&#x5408;&#x308F;&#x305B;&#x305F;&#x60C5;&#x5831;&#x306E;&#x53D6;&#x5F97;&#x306B;&#x5931;&#x6557;&#x3057;&#x305F;&#x3068;&#x304D;&#x306B;&#x8FD4;&#x3055;&#x308C;&#x308B;&#x30E1;&#x30C3;&#x30BB;&#x30FC;&#x30B8;&#xFF0E;</li>
+</ul>
+<pre><code class="lang-text">DB&#x30A8;&#x30E9;&#x30FC;&#x3067;&#x3059;&#xFF0E;&#x7BA1;&#x7406;&#x8005;&#x307E;&#x3067;&#x3054;&#x9023;&#x7D61;&#x304F;&#x3060;&#x3055;&#x3044;&#xFF0E;
+</code></pre>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: Introduction">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="bot/" class="navigation navigation-next " aria-label="Next page: About">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"static.pyの各変数について","level":"1.2","depth":1,"next":{"title":"About","level":"2.1","depth":1,"path":"bot/README.md","ref":"./bot/README.md","articles":[]},"previous":{"title":"Introduction","level":"1.1","depth":1,"path":"README.md","ref":"./README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["toc"],"pluginsConfig":{"toc":{"addClass":true,"className":"toc"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"STATIC.md","mtime":"2017-03-07T15:08:16.324Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-03-07T15:08:20.337Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

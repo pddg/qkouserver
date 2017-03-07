@@ -1,0 +1,3 @@
+[submodule "qkoubot/network/shibboleth_login"]
+	path = qkoubot/network/shibboleth_login
+	url = https://github.com/pddg/shibboleth_login

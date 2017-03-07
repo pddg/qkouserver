@@ -1,0 +1,13 @@
+.idea/*
+__pycache__/*
+*.pyc
+.DS_Store
+*.db
+*.log
+*.ini
+
+# ignore gitbook binary
+_book/*
+docs/_book/*
+node_modules/*
+docs_md/node_modules/*
