@@ -14,8 +14,9 @@ RUN apk --update add gcc \
     libxml2-dev \
     libxslt \
     libxslt-dev && \
-    echo "Asia/Tokyo" > /etc/timezone && \
-    dpkg-reconfigure -f noninteractive tzdata && \
+    cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime && \
+    apk del tzdata && \
+    rm -rf /var/cache/apk/* && \
     mkdir ${DATA_DIR} && \
     mkdir ${PRJ_PATH}
 
