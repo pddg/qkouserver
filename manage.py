@@ -86,6 +86,14 @@ def bot(args):
         cron_process(args.tweet, args.without_f)
     except KeyboardInterrupt:
         log_listener.join()
+        from static import TESTING
+        if TESTING:
+            from qkoubot.models import Base, engine
+            Base.metadata.drop_all(engine)
+            logger.info("Database was dropped.")
+        exit()
+    except (AssertionError, FileNotFoundError, KeyError) as e:
+        logger.exception(e.args)
         exit()
     except Exception as e:
         logger.exception(e.args)
@@ -108,6 +116,14 @@ def stream(args):
         stream_process()
     except KeyboardInterrupt:
         log_listener.join()
+        from static import TESTING
+        if TESTING:
+            from qkoubot.models import Base, engine
+            Base.metadata.drop_all(engine)
+            logger.info("Database was dropped.")
+        exit()
+    except (AssertionError, FileNotFoundError, KeyError) as e:
+        logger.exception(e.args)
         exit()
     except Exception as e:
         logger.exception(e.args)
@@ -133,7 +149,8 @@ def config_parse(path: str) -> None:
         },
         {
             "section": "other",
-            "keys": ["TESTING", "SCRAPING_INTERVAL", "LOGIN_FAILURE_TWEET_INTERVAL", "DAILY_TWEET_HOUR"]
+            "keys": ["TESTING", "SCRAPING_INTERVAL", "LOGIN_FAILURE_TWEET_INTERVAL",
+                     "DAILY_TWEET_HOUR", "SQLITE_PATH", "LOG_LOCATION"]
         }
     ]
     section_titles = [section["section"] for section in sections]

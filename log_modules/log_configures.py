@@ -3,10 +3,10 @@ from logging.handlers import QueueHandler, RotatingFileHandler
 from multiprocessing import Queue
 import sys
 
-from static import LOG_FORMAT
+from static import LOG_FORMAT, DEFAULT_LOG_LOCATION
 
 
-def configure_logger(log_level: int, echo: bool=True, file_log: bool=False, file_path: str="log") -> None:
+def configure_logger(log_level: int, echo: bool=True, file_log: bool=False, file_path: str=None) -> None:
     """
     Configure logging.Logger to log this app's behavior.
 
@@ -16,6 +16,8 @@ def configure_logger(log_level: int, echo: bool=True, file_log: bool=False, file
         file_log: ファイルへのロギングを有効化するフラグ
         file_path: ログファイルを格納するディレクトリへのパス
     """
+    if file_path is None or file_path == "log":
+        file_path = DEFAULT_LOG_LOCATION
     logger = getLogger()
     if echo:
         f_debug_handler = StreamHandler(sys.stdout)
