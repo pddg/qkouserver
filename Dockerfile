@@ -13,10 +13,10 @@ RUN apk --update add gcc \
     libxml2 \
     libxml2-dev \
     libxslt \
-    libxslt-dev && \
+    libxslt-dev \
+    tzdata && \
     cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime && \
-    apk del tzdata && \
-    rm -rf /var/cache/apk/* && \
+    echo "Asia/Tokyo" > /etc/timezone && \
     mkdir ${DATA_DIR} && \
     mkdir ${PRJ_PATH}
 
@@ -24,7 +24,15 @@ COPY . ${PRJ_PATH}
 
 WORKDIR ${PRJ_PATH}
 
-RUN pip3 install -r requirements.txt
+RUN pip3 install -r requirements.txt && \
+    apk del gcc \
+    g++ \
+    libxml2 \
+    libxml2-dev \
+    libxslt \
+    libxslt-dev \
+    tzdata && \
+    rm -rf /var/cache/apk/*
 
 ENTRYPOINT ["python3", "manage.py"]
 
