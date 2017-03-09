@@ -5,7 +5,7 @@ from sqlalchemy.exc import IntegrityError
 
 from qkoubot.models import Info, Session, Base, engine
 from .utils import insert_all, delete_all, query_to_dict
-from static import INFO_MODEL_DATA_DICTS, SUBJECT_MODEL_DATA_DICTS
+from static import INFO_MODEL_DATA_DICTS
 
 
 class TestInfoModel(unittest.TestCase):
