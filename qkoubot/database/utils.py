@@ -57,30 +57,6 @@ def update_info(data: Info) -> bool:
             return False
 
 
-# def update_subject(data: Subject) -> bool:
-#     """
-#     Update data in subject table with given parameter.
-#
-#     Args:
-#         data: Subject model object
-#
-#     Returns:
-#         When success, return True. If filtered object is None, return False (this happening is exception).
-#     """
-#     with Session() as session:
-#         w = INTENSIVE if data.week == INTENSIVE or data.week == UNDEFINED else data.week + data.period
-#         existing = session.query(Subject).filter(and_(Subject.title.contains(data.title),
-#                                                       Subject.teacher.contains(data.teacher),
-#                                                       Subject.day_and_period.contains(w),
-#                                                       Subject.credits_ == data.credits_)).first()  # type: Subject
-#         if existing is None:
-#             return False
-#         else:
-#             existing.last_confirmed = datetime.now()
-#             session.commit()
-#             return True
-
-
 def delete_olds(table: T) -> bool:
     """
     Delete data created at 1day or more old.
@@ -96,7 +72,7 @@ def delete_olds(table: T) -> bool:
         olds = session.query(table).filter(table.created_at < (datetime.now() - timedelta(days=1))).all()
         if len(olds) == 0:
             return False
-        for old in olds:
+        for old in [old for old in olds if not old.is_deleted]:
             logger.debug("[DELETE] " + str(old))
             old.is_deleted = True
         session.commit()
