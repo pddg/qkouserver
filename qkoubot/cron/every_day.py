@@ -18,7 +18,7 @@ class TodayCancel(object):
 
     def __init__(self, queue: Queue):
         self.last_tweet_date = datetime.now()
-        self.today_job_is_done = True
+        self.today_job_is_done = False
         self.auth = GetAuth()
         self.api = self.auth.api
         self.queue = queue
@@ -32,8 +32,7 @@ class TodayCancel(object):
             True: 削除に成功
         """
         # 昨日の日付を取得
-        d = datetime.now() + timedelta(days=-1)
-        yesterday = "{year}/{month}/{day}".format(year=str(d.year), month=str(d.month), day=str(d.day))
+        yesterday = (datetime.now() + timedelta(days=-1)).strftime("%Y/%m/%d")
         # TLの取得
         try:
             tweets = tweepy.Cursor(self.api.user_timeline, id=self.auth.my_info.id).items(100)
@@ -77,16 +76,15 @@ class TodayCancel(object):
             self.today_job_is_done = False
 
     @staticmethod
-    def __convert_title_tweet(date: str, cancels: List[Cancel]) -> List[str]:
+    def __convert_title_tweet(date: str, title_list: List[str]) -> List[str]:
         """
         休講の科目名一覧から今日の休講ツイートを作成する関数．最終的にツイートする内容をリストにして返す．
         Args:
             date: 今日の日付のstring
-            cancels: 今日の休講のリスト
+            title_list: 今日の休講科目の科目名リスト
         Return:
             ツイートする内容のリスト
         """
-        title_list = [cancel.subject.title for cancel in cancels]
         if len(title_list) == 0:
             return [TODAY_CANCEL_NONE_TEMPLATE.format(date=date)]
         raw_sentence = TODAY_CANCEL_TEMPLATE.format(date=date, titles=", ".join(title_list))
@@ -118,4 +116,4 @@ class TodayCancel(object):
         with Session() as session:
             today_cancels = session.query(Cancel).filter(and_(Cancel.day > (now + timedelta(days=-1)),
                                                               Cancel.day < (now + timedelta(days=1)))).all()
-        return self.__convert_title_tweet(now.strftime("%Y/%m/%d"), today_cancels)
+        return self.__convert_title_tweet(now.strftime("%Y/%m/%d"), [cancel.title for cancel in today_cancels])

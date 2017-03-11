@@ -38,3 +38,9 @@ class ServerErrorLog(Base):
         else:
             status = LOGIN_FAILURE_START_MSG.format(created_at=created_at)
         return status
+
+    def __repr__(self):
+        return "<ServerError '{id}' '{created_at}' '{last_confirmed}'>"\
+            .format(id=str(self.id),
+                    created_at=self.created_at.strftime("%Y/%m/%d"),
+                    last_confirmed=self.last_confirmed.strftime("%Y/%m/%d"))

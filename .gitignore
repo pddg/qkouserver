@@ -5,7 +5,7 @@ __pycache__/*
 *.db
 *.log
 *.ini
-
+.python-version
 # ignore gitbook binary
 _book/*
 docs/_book/*

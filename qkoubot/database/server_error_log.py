@@ -13,15 +13,13 @@ class LoginFailureLog(object):
     ログイン試行に失敗したときに適切にロギングするためのクラス．
     self.newest_failureで常に最新の障害情報を保持する．
     """
-    last_confirmed = datetime.now()
-    current_status = True
-
     def __init__(self, queue: Queue):
+        self.last_confirmed = datetime.now()
+        self.tweetable = False
         self.logger = getLogger("LoginFailureLogger")
         self.queue = queue
-        self.newest_failure = self.get_newest_failure()  # type: ServerErrorLog
+        self.newest_failure = self.get_newest_failure()  # type: Optional[ServerErrorLog]
         # 初期化時に古すぎるデータを無かったことにする
-        self.tweetable = False
         if self.newest_failure is not None \
                 and (self.last_confirmed - self.newest_failure.last_confirmed).total_seconds() > 3600:
             with Session() as session:
@@ -41,7 +39,7 @@ class LoginFailureLog(object):
             newest = session.query(ServerErrorLog)\
                 .order_by(desc(ServerErrorLog.created_at))\
                 .filter(ServerErrorLog.is_fixed is False)\
-                .limit(1).first()  # type: ServerErrorLog
+                .limit(1).first()  # type: Optional[ServerErrorLog]
         return newest
 
     def error_occurs(self, e: str):
@@ -53,14 +51,11 @@ class LoginFailureLog(object):
             e: Exceptionの中身
         """
         self.last_confirmed = datetime.now()
-        if self.current_status:
-            do_tweet = self.create_new_failure_log(e)
-        else:
-            do_tweet = self.update_failure_log()
+        do_tweet = self.create_new_failure_log(e) if self.current_status else self.update_failure_log()
         if do_tweet and self.tweetable:
             self.queue.put(str(self.newest_failure))
         self.current_status = False
-        self.logger.warning(str(self.newest_failure))
+        self.logger.warning(self.newest_failure.__repr__())
 
     def create_new_failure_log(self, e: str) -> bool:
         """
@@ -113,4 +108,4 @@ class LoginFailureLog(object):
                 session.commit()
             if self.tweetable:
                 self.queue.put(str(self.newest_failure))
-            self.logger.info(str(self.newest_failure))
+            self.logger.info(self.newest_failure.__repr__())
