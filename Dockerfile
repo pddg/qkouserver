@@ -27,10 +27,6 @@ WORKDIR ${PRJ_PATH}
 RUN pip3 install -r requirements.txt && \
     apk del gcc \
     g++ \
-    libxml2 \
-    libxml2-dev \
-    libxslt \
-    libxslt-dev \
     tzdata && \
     rm -rf /var/cache/apk/*
 
