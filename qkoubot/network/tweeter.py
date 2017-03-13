@@ -67,6 +67,7 @@ class TweetThread(Thread):
                 if data is None:
                     break
                 if self.tweetable:
+                    self.logger.debug("[TWEET] " + data)
                     self.get_auth.api.update_status(status=data)
             except Empty:
                 break

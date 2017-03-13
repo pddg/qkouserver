@@ -23,6 +23,7 @@ class ReplyInfo(object):
         try:
             with self.session() as session:
                 info = session.query(self.model).filter(self.model.id == id_).first()
+                self.logger.debug("Get data that id is {id} from database.".format(id=id_))
                 return str(info) if info and not info.is_deleted else THERE_IS_NO_INFORMATION_MSG
         except Exception as e:
             self.logger.exception(e.args)

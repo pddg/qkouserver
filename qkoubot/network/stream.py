@@ -75,11 +75,16 @@ def tweet_assembler(status, api) -> Tuple[int, int]:
         mode: 0 is Info. 1 is News. 2 is Cancel. 3 is None
         id: Scrape it from text. if there is no match, return 0.
     """
+    logger = getLogger("TweetAssembler")
     from static import REPLY_ACTION_REGEX
     regex = REPLY_ACTION_REGEX
     if re.match(regex, status.text, re.U):
+        logger.debug("in_reply_to_status is matched with REPLY_ACTION_REGEX")
         from_id = status.in_reply_to_status_id
+        if from_id is None:
+            return 3, 0
         from_status = api.get_status(from_id)
+        logger.debug("Get tweet whose id is {from_id}".format(from_id=from_id))
         entities = from_status.entities['hashtags']
         if len(entities) > 0:
             tag = entities[0]['text']

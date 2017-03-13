@@ -35,6 +35,7 @@ class TodayCancel(object):
         yesterday = (datetime.now() + timedelta(days=-1)).strftime("%Y/%m/%d")
         # TLの取得
         try:
+            self.logger.debug("Try to get tweets...")
             tweets = tweepy.Cursor(self.api.user_timeline, id=self.auth.my_info.id).items(100)
         except Exception as e:
             self.logger.exception(e)
@@ -44,6 +45,7 @@ class TodayCancel(object):
         for tweet, match in results:
             if match:
                 try:
+                    self.logger.debug("[DESTROY] tweet's id is {id}".format(id=tweet.id))
                     self.api.destroy_status(tweet.id)
                 except Exception as e:
                     self.logger.exception(e)
@@ -65,14 +67,18 @@ class TodayCancel(object):
             if holiday is None:
                 contents = self.__get_sentence(now)
                 for content in contents:
+                    self.logger.debug("[TWEET] " + content)
                     self.queue.put(content)
             else:
-                self.queue.put(TODAY_IS_HOLIDAY_TEMPLATE.format(date=now.strftime("%Y/%m/%d"),
-                                                                holiday_name=holiday, msg=choice(HOLIDAY_MSG_ARRAY)))
+                content = TODAY_IS_HOLIDAY_TEMPLATE.format(date=now.strftime("%Y/%m/%d"),
+                                                           holiday_name=holiday, msg=choice(HOLIDAY_MSG_ARRAY))
+                self.logger.debug("[TWEET] " + content)
+                self.queue.put(content)
             self.today_job_is_done = True
             self.last_tweet_date = now
         passed_hour = (now - self.last_tweet_date).total_seconds() / 3600
         if passed_hour > 20:
+            self.logger.debug("Make next day's cron job enable.")
             self.today_job_is_done = False
 
     @staticmethod
