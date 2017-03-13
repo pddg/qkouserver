@@ -69,11 +69,14 @@ def delete_olds(table: T) -> bool:
     """
     logger = getLogger("DeleteOld")
     with Session() as session:
-        olds = session.query(table).filter(table.created_at < (datetime.now() - timedelta(days=1))).all()
+        yday = datetime.now() - timedelta(days=1)
+        logger.debug("Delete data confirmed finally more than {date} before"
+                     .format(date=yday.strftime("%Y/%m/%d %H:%M")))
+        olds = session.query(table).filter(table.last_confirmed < yday).all()
         if len(olds) == 0:
             return False
-        for old in [old for old in olds if not old.is_deleted]:
-            logger.debug("[DELETE] " + str(old))
+        for old in [old for old in olds if old.is_deleted]:
+            logger.debug("[DELETE] " + old.__repr__())
             old.is_deleted = True
         session.commit()
         return True
