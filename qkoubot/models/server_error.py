@@ -17,7 +17,7 @@ class ServerErrorLog(Base):
     fixed_at = Column(DATETIME, nullable=True)
     tweeted_at = Column(DATETIME)
     last_confirmed = Column(DATETIME)
-    created_at = Column(DATETIME, default=datetime.now())
+    created_at = Column(DATETIME)
 
     def __init__(self, message: str, is_fixed: bool=False, created_at: datetime=datetime.now()):
         self.message = message

@@ -51,23 +51,24 @@ class LoginFailureLog(object):
             e: Exceptionの中身
         """
         self.last_confirmed = datetime.now()
-        do_tweet = self.create_new_failure_log(e) if self.current_status else self.update_failure_log()
+        do_tweet = self.create_new_failure_log(e, created_at=self.last_confirmed) if self.current_status else self.update_failure_log()
         if do_tweet and self.tweetable:
             self.queue.put(str(self.newest_failure))
         self.current_status = False
         self.logger.warning(self.newest_failure.__repr__())
 
-    def create_new_failure_log(self, e: str) -> bool:
+    def create_new_failure_log(self, e: str, created_at: datetime) -> bool:
         """
         新規情報の作成．
 
         Args:
             e: Exceptionの中身
+            created_at: 障害発生日時
         Returns:
             True
         """
         with Session() as session:
-            latest = ServerErrorLog(e)
+            latest = ServerErrorLog(e, created_at=created_at)
             session.add(latest)
             session.commit()
         self.newest_failure = latest
