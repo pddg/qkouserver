@@ -87,7 +87,7 @@ LOGIN_FAILURE_END_MSG = "[障害復旧]\n障害検知時刻: {created_at}\n復�
 TODAY_CANCEL_TEMPLATE = "{date} 本日の休講\n{titles}"
 TODAY_CANCEL_NONE_TEMPLATE = "{date} 本日休講はありません．"
 TODAY_CANCEL_TEMPLATE_CONTINUE = "{date} 本日の休講 続き\n{titles}"
-TODAY_IS_HOLIDAY_TEMPLATE = "{date} 今日は{holiday_name}の日です．{msg}"
+TODAY_IS_HOLIDAY_TEMPLATE = "{date} 今日は{holiday_name}です．{msg}"
 HOLIDAY_MSG_ARRAY = ["レポートや課題は終わりましたか？有意義な祝日をお過ごしください．",
                      "進捗どうですか？",
                      "今日くらいはこのbotもお休みをいただいても良いですか？まぁダメですよね．",
