@@ -67,12 +67,10 @@ class TodayCancel(object):
             if holiday is None:
                 contents = self.__get_sentence(now)
                 for content in contents:
-                    self.logger.debug("[TWEET] " + content)
                     self.queue.put(content)
             else:
                 content = TODAY_IS_HOLIDAY_TEMPLATE.format(date=now.strftime("%Y/%m/%d"),
                                                            holiday_name=holiday, msg=choice(HOLIDAY_MSG_ARRAY))
-                self.logger.debug("[TWEET] " + content)
                 self.queue.put(content)
             self.today_job_is_done = True
             self.last_tweet_date = now
