@@ -45,6 +45,7 @@ def update_info(data: Info) -> bool:
             and_(Info.unique_hash == data.unique_hash, Info.is_deleted is not True)).first()  # type: Info
         if exist.renew_hash != data.renew_hash:
             # Update data
+            data.id = exist.id
             exist.detail = data.detail
             exist.updated_date = data.updated_date
             exist.renew_hash = data.renew_hash
