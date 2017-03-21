@@ -31,6 +31,7 @@ def cron_process(tweet: bool=False, failure_tweet: bool=True):
         tweet_thread.tweetable = tweet
         cron_job.tweetable = tweet
         failure_logger.tweetable = failure_tweet
+        tweet = False
         logger.info("Now completed preparing for tweet.")
     while True:
         try:
