@@ -89,8 +89,7 @@ def tweet_assembler(status, api) -> Tuple[int, int]:
         if len(entities) > 0:
             tag = entities[0]['text']
             return judge(tag)
-        else:
-            return 3, 0
+    return 3, 0
 
 
 def judge(hashtag: str) -> Tuple[int, int]:
