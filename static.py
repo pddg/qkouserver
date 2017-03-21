@@ -42,6 +42,7 @@ NEWS_URL = "https://portal.student.kit.ac.jp/?c=news"
 #                     "Advanced", "Intermediate", "Acquisition", "Communication"]
 
 TESTING = literal_eval(os.getenv("TESTING", "False").capitalize())
+INITIALIZE = literal_eval(os.getenv("INITIALIZE", "True").capitalize())
 
 # EXPIRE_ON = int(os.getenv("EXPIRE_ON", "60"))
 SCRAPING_INTERVAL = int(os.getenv("SCRAPING_INTERVAL", "300"))

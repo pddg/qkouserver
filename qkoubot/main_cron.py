@@ -9,7 +9,7 @@ from .scraper import scrape_process
 from .cron import TodayCancel
 from .models import Info, Cancel, News, Base, engine
 from .validators import tweet_vars_validate, shibboleth_vars_validate, db_path_validate
-from static import SCRAPING_INTERVAL
+from static import SCRAPING_INTERVAL, INITIALIZE
 
 
 def cron_process(tweet: bool=False, failure_tweet: bool=True):
@@ -27,6 +27,11 @@ def cron_process(tweet: bool=False, failure_tweet: bool=True):
     tweet_thread = TweetThread(tweet_queue)
     tweet_thread.start()
     failure_logger = LoginFailureLog(tweet_queue)
+    if not INITIALIZE and tweet:
+        tweet_thread.tweetable = tweet
+        cron_job.tweetable = tweet
+        failure_logger.tweetable = failure_tweet
+        logger.info("Now completed preparing for tweet.")
     while True:
         try:
             loop = asyncio.get_event_loop()
