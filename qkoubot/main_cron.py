@@ -28,6 +28,7 @@ def cron_process(tweet: bool=False, failure_tweet: bool=True):
     tweet_thread.start()
     failure_logger = LoginFailureLog(tweet_queue)
     if not INITIALIZE and tweet:
+        # 環境変数INITIALIZEがfalseの場合，初回実行時からツイートを有効化する
         tweet_thread.tweetable = tweet
         cron_job.tweetable = tweet
         failure_logger.tweetable = failure_tweet
@@ -39,17 +40,13 @@ def cron_process(tweet: bool=False, failure_tweet: bool=True):
             try:
                 # Login and get html
                 htmls = loop.run_until_complete(login_and_get_html(logger))
+                data_list_list = [scrape_process(html) for html in htmls]
                 failure_logger.set_fixed()
             except Exception as e:
                 logger.exception(e.args)
                 failure_logger.error_occurs(str(e.args))
             if failure_logger.current_status:
-                # ログインに成功し，HTMLを取得できた場合のみ
-                try:
-                    data_list_list = [scrape_process(html) for html in htmls]
-                except Exception as e:
-                    logger.exception(e.args)
-                    failure_logger.error_occurs(str(e.args))
+                # ログインに成功し，HTMLを取得し，パースできた場合のみ
                 # リストの平滑化
                 data_list = [data for d_list in data_list_list for data in d_list]
                 for data in data_list:
