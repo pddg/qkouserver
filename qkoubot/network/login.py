@@ -26,6 +26,6 @@ async def login_and_get_html(logger: Logger) -> List[Response]:
         obj_list = []
         for u in urls:
             r = await get_html(br, u)
-            logger.debug("[{url}] finished".format(url=r.url))
+            logger.debug("Loading {url} ... [finished]".format(url=r.url))
             obj_list.append(r)
     return obj_list

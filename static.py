@@ -73,7 +73,7 @@ LEC_CANCEL_TEMPLATE = "講義名：{subject}\n" \
 
 NEWS_ID_TEMPLATE = " #news{id}"
 NEWS_ACTION_REGEX = "(?<=news)[0-9]+"
-NEWS_TEMPLATE_WITH_LINK = "掲載日：{str_first}\n詳細：{detail}\nリンク：{link}"
+NEWS_TEMPLATE_WITH_LINK = "掲載日：{str_first}\n発信課: {division}\n概要: {category}\n詳細：{detail}\nリンク：{link}"
 NEWS_TEMPLATE_WITHOUT_LINK = "掲載日：{str_first}\n詳細：{detail}"
 
 THERE_IS_NO_INFORMATION_MSG = "お問い合わせされた情報は現在存在しません．"
@@ -125,9 +125,11 @@ CANCEL_MODEL_DATAS = [["休講情報bot入門", "pudding", "月", "1", "-", "201
                       ["休講情報Client実践", "pudding", "集中", "-", "疲れた", "2017/4/1", "2017/2/23"]]
 CANCEL_MODEL_DATA_DICTS = create_dict(CANCEL_MODEL_KEYS, CANCEL_MODEL_DATAS)
 
-NEWS_MODEL_KEYS = ["first", "detail", "link"]
-NEWS_MODEL_DATAS = [["2017.2.10", "2/21は情報工学課程の卒研発表の日です．", "http://hoge.hoge.com/fuga"],
+NEWS_MODEL_KEYS = ["first", "detail", "link", "division", "category"]
+NEWS_MODEL_DATAS = [["2017.2.10", "2/21は情報工学課程の卒研発表の日です．", "http://hoge.hoge.com/fuga",
+                     "〈学務課〉", "《-》"],
                     ["2017.2.12", "今日は文字数テストをしたいと思います．これは140文字を超えるように書いています．今はとても眠いです．"
                                   "テストを書く作業はとてもつらいので時給が欲しいという気持ちが高まっています．"
-                                  "僕の脳内の仕様を読み取って良い感じにして欲しい…お願い…ソフトウェア工学の力で解決して欲しい…", ""]]
+                                  "僕の脳内の仕様を読み取って良い感じにして欲しい…お願い…ソフトウェア工学の力で解決して欲しい…", "",
+                     "〈学務課〉", "《-》"]]
 NEWS_MODEL_DATA_DICTS = create_dict(NEWS_MODEL_KEYS, NEWS_MODEL_DATAS)

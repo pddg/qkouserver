@@ -20,14 +20,19 @@ class News(Base, QkouBase):
     created_at = Column(DateTime, default=datetime.now())
     is_deleted = Column(Boolean, unique=False, default=False)
     last_confirmed = Column(DateTime)
+    division = Column(String(length=30))
+    category = Column(String(length=30))
 
-    def __init__(self, first: str, detail: str, link: str, created_at: datetime=datetime.now()):
+    def __init__(self, first: str, detail: str, link: str, division: str, category: str,
+                 created_at: datetime=datetime.now()):
         self.first = self.convert_datetime(first)
         self.detail = detail.replace("\t", "")
         self.link = link
         self.unique_hash = self.make_unique_hash(first, detail)
         self.created_at = created_at
         self.last_confirmed = created_at
+        self.division = division
+        self.category = category
 
     @staticmethod
     def convert_datetime(time: str) -> datetime:
@@ -55,5 +60,7 @@ class News(Base, QkouBase):
             return NEWS_TEMPLATE_WITHOUT_LINK.format(str_first=str_first, **self.__dict__)
 
     def __repr__(self) -> str:
-        return "<News '{first}' '{detail}'>".format(first=self.first.strftime("%Y/%m/%d"),
-                                                    detail=self.detail[0:15])
+        return "<News '{first}' '{division}' '{category}' '{detail}'>".format(first=self.first.strftime("%Y/%m/%d"),
+                                                                              detail=self.detail[0:15],
+                                                                              division=self.division,
+                                                                              category=self.category)

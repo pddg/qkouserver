@@ -1,5 +1,6 @@
 import re
 from typing import Union, List
+from logging import getLogger
 from bs4 import BeautifulSoup
 from requests.models import Response
 from qkoubot.models import Info, News, Cancel
@@ -18,15 +19,18 @@ def scrape_process(html: Response) -> List[DM]:
     Returns:
         List of Info and Cancel and News model's instance.
     """
+    logger = getLogger("ScrapeFunction")
     info_list = []
     # Select model
     scraped_class, model = classification_models(html.url)
-    for tr in find_all_tr(html):
-        if tr is not None:
-            td = tr.find_all('td')
+    targets = find_all_tr(html) if model is not News else find_all_dl(html)
+    for target in targets:
+        if target is not None:
+            target_msgs = target.find_all('td') if model is not News else target.find_all('dd')
             # create instances
-            m = model(**scraped_class(td).__dict__)
+            m = model(**scraped_class(target_msgs).__dict__)
             info_list.append(m)
+    logger.debug("Scraping {url} ... [finished]".format(url=html.url))
     return info_list
 
 
@@ -60,10 +64,26 @@ def find_all_tr(res: Response) -> list:
     """
     # Use lxml as html parser.
     bs = BeautifulSoup(res.text, "lxml")
-    if "info" in res.url or "cancel" in res.url:
-        # ?c=lecture_information or ?c=lecture_cancellation
-        return bs.find_all('tr', attrs={'class': re.compile('^gen_')})
-    else:
-        # ?c=news
-        div = bs.find('div', attrs={'id': 'now_notice_area'})
-        return div.find_all('tr')
+    return bs.findAll('tr', attrs={'class': re.compile('^gen_')})
+
+
+def find_all_dl(res: Response) -> list:
+    """
+    「お知らせ」一覧からdlタグの中身をパースする関数
+    Args:
+        res: requests.models.Response object
+    Returns:
+        <dl>タグの中身のリスト
+    """
+    bs = BeautifulSoup(res.text, "lxml")
+    all_dl = bs.findAll("dl", attrs={'class': 'notice_list_dl'})
+    return [target for target in all_dl if is_news_row(target.attrs["class"])]
+
+
+def is_news_row(class_names: list) -> bool:
+    regex = re.compile("(cat|div)")
+    bool_list = [re.match(regex, class_name) for class_name in class_names]
+    for match in bool_list:
+        if match:
+            return True
+    return False

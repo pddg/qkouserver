@@ -33,6 +33,8 @@ class TestInfoModel(unittest.TestCase):
                 inserted_dict = query_to_dict(inserted)
                 eq_(info["link"], inserted_dict["link"])
                 eq_(info["detail"], inserted_dict["detail"])
+                eq_(info["division"], inserted_dict["division"])
+                eq_(info["category"], inserted_dict["category"])
                 eq_(inserted_dict["is_deleted"], False)
 
     def test_delete_old(self):
