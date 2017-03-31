@@ -33,9 +33,9 @@ SHIBBOLETH_PASSWORD = os.getenv("SHIBBOLETH_PASSWORD", None)
 
 # URLs
 # SYLLABUS_URL = "http://www.syllabus.kit.ac.jp/"
-LEC_INFO_URL = "https://portal.student.kit.ac.jp/?c=lecture_information"
-LEC_CANCEL_URL = "https://portal.student.kit.ac.jp/?c=lecture_cancellation"
-NEWS_URL = "https://portal.student.kit.ac.jp/?c=news"
+LEC_INFO_URL = "https://portal.student.kit.ac.jp/ead/?c=lecture_information"
+LEC_CANCEL_URL = "https://portal.student.kit.ac.jp/ead/?c=lecture_cancellation"
+NEWS_URL = "https://portal.student.kit.ac.jp/"
 
 # Other settings
 # EXCEPTION_TITLES = ["English", "Reading", "Writing", "Basic", "Speaking", "Learning",
