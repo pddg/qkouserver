@@ -26,11 +26,11 @@ QkouServerのルートディレクトリに存在する各種設定項目のフ�
 
 テンプレート文字列の修正は多くの場合，クラスの`__str__()`メソッドの改変が必要となります．
 
-#### 共通項目
+#### <s>共通項目</s>
 
-* `UNDEFINED` : 学務課掲載情報において値の記載がないもの．デフォルトは"-"．
-* `UNKNOWN` : プログラムの仕様上，満たすことの出来ない項目を埋める値．デフォルトは"不明"．
-* `INTENSIVE` : 集中講義の曜日項目を満たす値．デフォルトは"集中"
+* <s>`UNDEFINED` : 学務課掲載情報において値の記載がないもの．デフォルトは"-"．</s>
+* <s>`UNKNOWN` : プログラムの仕様上，満たすことの出来ない項目を埋める値．デフォルトは"不明"．</s>
+* <s>`INTENSIVE` : 集中講義の曜日項目を満たす値．デフォルトは"集中"．</s>
 
 #### `models.Info`
 
@@ -104,11 +104,6 @@ QkouServerのルートディレクトリに存在する各種設定項目のフ�
 "学務課ホームページへのログイン及び情報の取得に成功しました．
 ```
 
-### その他
-
-* `TESTING` : テスト実行であることを示すフラグ．環境変数`TESTING`に対応．デフォルトは`False`．
-このフラグを建てると`Ctrl + C`で終了時にデータベースの中身を消去する．
-
 ## Bot機能関連項目
 
 ### Twitter
@@ -130,9 +125,9 @@ Botとしてつぶやくために必須な項目．現在，つぶやきを有�
 ### URL
 
 * <s>`SYLLABUS_URL` : シラバスのURL．"http://www.syllabus.kit.ac.jp/"</s>
-* `LEC_INFO_URL` : 授業関係連絡のURL．"https://portal.student.kit.ac.jp/?c=lecture_information"
-* `LEC_CANCEL_URL` : 休講情報のURL．"https://portal.student.kit.ac.jp/?c=lecture_cancellation"
-* `NEWS_URL` : 最新情報のURL．"https://portal.student.kit.ac.jp/?c=news"
+* `LEC_INFO_URL` : 授業関係連絡のURL．"https://portal.student.kit.ac.jp/ead/?c=lecture_information"
+* `LEC_CANCEL_URL` : 休講情報のURL．"https://portal.student.kit.ac.jp/ead/?c=lecture_cancellation"
+* `NEWS_URL` : 最新情報のURL．"https://portal.student.kit.ac.jp/"
 
 ### <s>シラバス</s>
 
@@ -158,7 +153,7 @@ Botとしてつぶやくために必須な項目．現在，つぶやきを有�
 {titles}"
 ```
 
-* `TODAY_CANCEL_TEMPLATE_CONTINUE` : 一つの本日の休講ツイートに収まりきらなかった場合に続けてツイートされる場合のテンプレート文字列．
+* `TODAY_CANCEL_TEMPLATE_CONTINUE` : 一つの本日の休講ツイートに収まりきらなかった場合に続けてツイートされるテンプレート文字列．
 
 ```text
 {date} 本日の休講 続き
@@ -179,6 +174,12 @@ Botとしてつぶやくために必須な項目．現在，つぶやきを有�
 "今日くらいはこのbotもお休みをいただいても良いですか？まぁダメですよね．",
 "ところでこのbotはPythonというプログラミング言語で書かれています．せっかくの休日ですし新しいことを始めてみては？"]
 ```
+
+* `TESTING` : テスト実行であることを示すフラグ．環境変数`TESTING`に対応．デフォルトは`False`．
+このフラグを建てると`Ctrl + C`で終了時にデータベースの中身を消去する．
+
+* `INITIALIZE` : 初回実行フラグ．環境変数`INITIALIZE`に対応．デフォルトは`True`．このプロセスは必ず初回実行時のツイートを無効にするため，
+一度終了させた後，次回の初回実行時に更新がツイートされない．`False`を与えることでツイートを行うようになる．
 
 ### ストリーム処理プロセス
 
