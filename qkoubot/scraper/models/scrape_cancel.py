@@ -21,7 +21,7 @@ class CancelScraper(object):
              args: 取得した<td>タグの中身をnormalizeしたりした値のリスト
         """
         str_args = [td.text.strip() for td in args[2:9]]
-        self.subject = normalize("NFKC", str_args[0])
+        self.title = normalize("NFKC", str_args[0])
         self.teacher = normalize("NFKC", str_args[1])
         self.day = normalize("NFKC", str_args[2])
         self.week = normalize("NFKC", str_args[3])
