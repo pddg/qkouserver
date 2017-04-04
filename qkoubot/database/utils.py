@@ -49,6 +49,9 @@ def update_info(data: Info) -> bool:
         exist = sess.query(Info).filter(
             and_(Info.unique_hash == data.unique_hash, Info.is_deleted is not True)).first()  # type: Info
         if exist.renew_hash != data.renew_hash:
+            if (exist.last_confirmed - data.last_confirmed).total_seconds() < 5:
+                # 暫定処理として同一の主キーとなるに関わらず，内容が変化している項目が複数掲載された場合，変更を握りつぶす．
+                return False
             # Update data
             data.id = exist.id
             exist.detail = data.detail
