@@ -328,7 +328,10 @@
 <li><a href="#&#x5404;&#x7A2E;&#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;&#x306B;&#x3064;&#x3044;&#x3066;">&#x5404;&#x7A2E;&#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;&#x306B;&#x3064;&#x3044;&#x3066;</a></li>
 <li><a href="#ini&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3092;&#x4F7F;&#x7528;&#x3059;&#x308B;&#x5834;&#x5408;">ini&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3092;&#x4F7F;&#x7528;&#x3059;&#x308B;&#x5834;&#x5408;</a></li>
 <li><a href="#ini&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3092;&#x4F7F;&#x7528;&#x3057;&#x306A;&#x3044;&#x5834;&#x5408;">ini&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3092;&#x4F7F;&#x7528;&#x3057;&#x306A;&#x3044;&#x5834;&#x5408;</a></li>
-<li><a href="#sqlite&#x3092;&#x4F7F;&#x7528;&#x3057;&#x3066;&#x3044;&#x308B;&#x5834;&#x5408;">SQLite&#x3092;&#x4F7F;&#x7528;&#x3057;&#x3066;&#x3044;&#x308B;&#x5834;&#x5408;</a></li>
+<li><a href="#sqlite&#x3092;&#x4F7F;&#x7528;&#x3057;&#x3066;&#x3044;&#x308B;&#x5834;&#x5408;">SQLite&#x3092;&#x4F7F;&#x7528;&#x3057;&#x3066;&#x3044;&#x308B;&#x5834;&#x5408;</a><ul>
+<li><a href="#&#x6392;&#x4ED6;&#x5236;&#x5FA1;&#x306B;&#x3064;&#x3044;&#x3066;">&#x6392;&#x4ED6;&#x5236;&#x5FA1;&#x306B;&#x3064;&#x3044;&#x3066;</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -339,14 +342,17 @@
 $ python manage.py -h
 usage: manage.py [-h] {qkoubot,stream} ...
 
-QkouBot and QkouAPI is the application <span class="hljs-keyword">for</span> KIT students. These are
-automatically collect and redistribute information and cancellation of
-lecture. QkouBot detect update of information and tweet it.
+QkouBot is an application <span class="hljs-keyword">for</span> KIT students. This automatically collect and
+redistribute information and cancellation of lectures. QkouBot detect update
+of information and tweet it.
 
 positional arguments:
   {qkoubot,stream}  sub commands <span class="hljs-built_in">help</span>
     qkoubot         Start QkouBot <span class="hljs-built_in">command</span>
     stream          Start stream processing
+
+optional arguments:
+  -h, --help        show this <span class="hljs-built_in">help</span> message and <span class="hljs-built_in">exit</span>
 </code></pre>
 <h1 id="&#x66F4;&#x65B0;&#x901A;&#x77E5;bot&#x3068;&#x3057;&#x3066;&#x8D77;&#x52D5;">&#x66F4;&#x65B0;&#x901A;&#x77E5;bot&#x3068;&#x3057;&#x3066;&#x8D77;&#x52D5;</h1>
 <p><code>qkoubot</code>&#x30B3;&#x30DE;&#x30F3;&#x30C9;&#x3092;&#x4F7F;&#x7528;&#x3057;&#x307E;&#x3059;&#xFF0E;</p>
@@ -505,6 +511,10 @@ optional arguments:
 <span class="hljs-attr">    restart:</span> always
 <span class="hljs-attr">    command:</span> stream -v --ini /data/config.ini --file-log-enable
 </code></pre>
+<h3 id="&#x6392;&#x4ED6;&#x5236;&#x5FA1;&#x306B;&#x3064;&#x3044;&#x3066;">&#x6392;&#x4ED6;&#x5236;&#x5FA1;&#x306B;&#x3064;&#x3044;&#x3066;</h3>
+<p>&#x4E0A;&#x8A18;&#x306E;&#x3088;&#x3046;&#x306B;SQLite&#x30C7;&#x30FC;&#x30BF;&#x30D9;&#x30FC;&#x30B9;&#x306E;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3092;&#x30D7;&#x30ED;&#x30BB;&#x30B9;&#x9593;&#x3067;&#x5171;&#x6709;&#x3059;&#x308B;&#x3068;&#xFF0C;&#x304A;&#x305D;&#x3089;&#x304F;&#xFF08;&#x671F;&#x5F85;&#x3055;&#x308C;&#x308B;&#x52D5;&#x4F5C;&#x3068;&#x3057;&#x3066;&#x306F;&#xFF09;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3054;&#x3068;&#x30ED;&#x30C3;&#x30AF;&#xFF0C;&#x3064;&#x307E;&#x308A;&#xFF0C;qkoubot&#x306E;&#x30D7;&#x30ED;&#x30BB;&#x30B9;&#x304C;&#x66F8;&#x304D;&#x8FBC;&#x307F;&#x3092;&#x3059;&#x308B;&#x9593;&#xFF0C;stream&#x30D7;&#x30ED;&#x30BB;&#x30B9;&#x306F;&#x3044;&#x304B;&#x306A;&#x308B;&#x8AAD;&#x307F;&#x8FBC;&#x307F;&#x3082;&#x51FA;&#x6765;&#x306A;&#x3044;&#x306F;&#x305A;&#x3067;&#x3059;&#xFF0E;  </p>
+<p>&#x3053;&#x308C;&#x306F;&#x53B3;&#x5BC6;&#x306B;&#x691C;&#x8A3C;&#x3057;&#x305F;&#x308F;&#x3051;&#x3067;&#x306F;&#x7121;&#x304F;&#xFF0C;&#x4ED5;&#x69D8;&#x4E0A;&#x304A;&#x305D;&#x3089;&#x304F;&#x305D;&#x3046;&#x3060;&#x308D;&#x3046;&#x3068;&#x3044;&#x3046;&#x61B6;&#x6E2C;&#x3067;&#x66F8;&#x3044;&#x3066;&#x3044;&#x307E;&#x3059;&#xFF0E;&#x73FE;&#x72B6;bot&#x306E;&#x52D5;&#x4F5C;&#x306F;&#x305D;&#x308C;&#x307B;&#x3069;&#x9045;&#x3044;&#x30E2;&#x30CE;&#x3067;&#x3082;&#x7121;&#x304F;&#xFF0C;&#x305D;&#x308C;&#x307B;&#x3069;&#x983B;&#x7E41;&#x306B;userstream&#x304B;&#x3089;&#x306E;&#x30A2;&#x30AF;&#x30BB;&#x30B9;&#x304C;&#x6765;&#x308B;&#x308F;&#x3051;&#x3067;&#x3082;&#x5185;&#x306E;&#x3067;SQLite&#x3067;&#x3082;&#x826F;&#x3044;&#x3068;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x304C;&#xFF0C;&#x5FC3;&#x914D;&#x306A;&#x3089;&#x3070;MySQL&#x3092;&#x4F7F;&#x7528;&#x3059;&#x308B;&#x3079;&#x304D;&#x3067;&#x3057;&#x3087;&#x3046;&#xFF0E;</p>
+<p>&#x305F;&#x3060;&#x3057;SQLite&#x306B;&#x304A;&#x3044;&#x3066;&#x3082;&#x8907;&#x6570;&#x30D7;&#x30ED;&#x30BB;&#x30B9;&#x9593;&#x3067;&#x306E;&#x51E6;&#x7406;&#x306F;&#x9069;&#x5207;&#x306B;&#x884C;&#x308F;&#x308C;&#x308B;&#x306F;&#x305A;&#x3067;&#x3042;&#x308A;&#xFF0C;&#x305D;&#x308C;&#x307B;&#x3069;&#x554F;&#x984C;&#x306F;&#x7121;&#x3044;&#x3068;&#x8A00;&#x3048;&#x308B;&#x304B;&#x3082;&#x77E5;&#x308C;&#x307E;&#x305B;&#x3093;&#xFF0E;</p>
 
                                 
                                 </section>
@@ -548,7 +558,7 @@ optional arguments:
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"起動・運用","level":"2.3","depth":1,"next":{"title":"更新通知botとして起動","level":"2.3.1","depth":2,"anchor":"#更新通知botとして起動","path":"bot/USAGE.md","ref":"./bot/USAGE.md#更新通知botとして起動","articles":[]},"previous":{"title":"運用環境の構築","level":"2.2.2","depth":2,"anchor":"#運用環境の構築","path":"bot/ENVIRONMENT.md","ref":"./bot/ENVIRONMENT.md#運用環境の構築","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["toc"],"pluginsConfig":{"toc":{"addClass":true,"className":"toc"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"bot/USAGE.md","mtime":"2017-04-02T04:33:22.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-04-02T04:33:25.516Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"起動・運用","level":"2.3","depth":1,"next":{"title":"更新通知botとして起動","level":"2.3.1","depth":2,"anchor":"#更新通知botとして起動","path":"bot/USAGE.md","ref":"./bot/USAGE.md#更新通知botとして起動","articles":[]},"previous":{"title":"運用環境の構築","level":"2.2.2","depth":2,"anchor":"#運用環境の構築","path":"bot/ENVIRONMENT.md","ref":"./bot/ENVIRONMENT.md#運用環境の構築","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["toc"],"pluginsConfig":{"toc":{"addClass":true,"className":"toc"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"bot/USAGE.md","mtime":"2017-04-04T07:08:16.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-04-04T07:10:41.706Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

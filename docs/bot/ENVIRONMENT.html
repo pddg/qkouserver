@@ -466,14 +466,17 @@ OK
 $ docker run --rm pddg/qkouserver:latest
 usage: manage.py [-h] {qkoubot,stream} ...
 
-QkouBot and QkouAPI is the application <span class="hljs-keyword">for</span> KIT students. These are
-automatically collect and redistribute information and cancellation of
-lecture. QkouBot detect update of information and tweet it.
+QkouBot is an application <span class="hljs-keyword">for</span> KIT students. This automatically collect and
+redistribute information and cancellation of lectures. QkouBot detect update
+of information and tweet it.
 
 positional arguments:
   {qkoubot,stream}  sub commands <span class="hljs-built_in">help</span>
     qkoubot         Start QkouBot <span class="hljs-built_in">command</span>
     stream          Start stream processing
+
+optional arguments:
+  -h, --help        show this <span class="hljs-built_in">help</span> message and <span class="hljs-built_in">exit</span>
 </code></pre>
 <h3 id="2-twitter&#x306E;&#x8A8D;&#x8A3C;&#x60C5;&#x5831;&#x3084;&#x5B66;&#x751F;&#x756A;&#x53F7;&#x7B49;&#x3092;&#x5165;&#x529B;">2. Twitter&#x306E;&#x8A8D;&#x8A3C;&#x60C5;&#x5831;&#x3084;&#x5B66;&#x751F;&#x756A;&#x53F7;&#x7B49;&#x3092;&#x5165;&#x529B;</h3>
 <p><code>docker-compose.yml</code>&#x3092;&#x7F6E;&#x304F;&#x30C7;&#x30A3;&#x30EC;&#x30AF;&#x30C8;&#x30EA;&#x3092;&#x9069;&#x5F53;&#x306B;&#x6C7A;&#x3081;&#x307E;&#x3059;&#xFF0E;&#x4ECA;&#x56DE;&#x306F;&#x30E6;&#x30FC;&#x30B6;&#x306E;&#x30DB;&#x30FC;&#x30E0;&#x30C7;&#x30A3;&#x30EC;&#x30AF;&#x30C8;&#x30EA;&#x4EE5;&#x4E0B;&#x306B;<code>containers/qkoubot</code>&#x3092;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;&#xFF0E;</p>
@@ -569,7 +572,7 @@ $ docker build ./qkouserver
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"環境構築","level":"2.2","depth":1,"next":{"title":"開発環境の構築","level":"2.2.1","depth":2,"anchor":"#開発環境の構築","path":"bot/ENVIRONMENT.md","ref":"./bot/ENVIRONMENT.md#開発環境の構築","articles":[]},"previous":{"title":"About","level":"2.1","depth":1,"path":"bot/README.md","ref":"./bot/README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["toc"],"pluginsConfig":{"toc":{"addClass":true,"className":"toc"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"bot/ENVIRONMENT.md","mtime":"2017-04-02T03:14:36.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-04-02T04:33:25.516Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"環境構築","level":"2.2","depth":1,"next":{"title":"開発環境の構築","level":"2.2.1","depth":2,"anchor":"#開発環境の構築","path":"bot/ENVIRONMENT.md","ref":"./bot/ENVIRONMENT.md#開発環境の構築","articles":[]},"previous":{"title":"About","level":"2.1","depth":1,"path":"bot/README.md","ref":"./bot/README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["toc"],"pluginsConfig":{"toc":{"addClass":true,"className":"toc"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"bot/ENVIRONMENT.md","mtime":"2017-04-04T07:08:16.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-04-04T07:10:41.706Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
