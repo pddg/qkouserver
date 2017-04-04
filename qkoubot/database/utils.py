@@ -27,6 +27,11 @@ def add(data: T) -> bool:
     except IntegrityError:
         # unique key error
         # new data and existence data in DB are duplicates.
+        with Session() as sess:
+            exists = sess.query(data.__class__).filter_by(unique_hash=data.unique_hash).first()  # type: T
+            if not exists.is_deleted:
+                exists.last_confirmed = data.last_confirmed
+                sess.commit()
         return False
 
 
