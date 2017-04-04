@@ -171,14 +171,17 @@ $ docker pull pddg/qkouserver:latest
 $ docker run --rm pddg/qkouserver:latest
 usage: manage.py [-h] {qkoubot,stream} ...
 
-QkouBot and QkouAPI is the application for KIT students. These are
-automatically collect and redistribute information and cancellation of
-lecture. QkouBot detect update of information and tweet it.
+QkouBot is an application for KIT students. This automatically collect and
+redistribute information and cancellation of lectures. QkouBot detect update
+of information and tweet it.
 
 positional arguments:
   {qkoubot,stream}  sub commands help
     qkoubot         Start QkouBot command
     stream          Start stream processing
+
+optional arguments:
+  -h, --help        show this help message and exit
 ```
 
 ### 2. Twitterの認証情報や学生番号等を入力

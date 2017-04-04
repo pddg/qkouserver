@@ -9,14 +9,17 @@ $ cd path/to/qkouserver
 $ python manage.py -h
 usage: manage.py [-h] {qkoubot,stream} ...
 
-QkouBot and QkouAPI is the application for KIT students. These are
-automatically collect and redistribute information and cancellation of
-lecture. QkouBot detect update of information and tweet it.
+QkouBot is an application for KIT students. This automatically collect and
+redistribute information and cancellation of lectures. QkouBot detect update
+of information and tweet it.
 
 positional arguments:
   {qkoubot,stream}  sub commands help
     qkoubot         Start QkouBot command
     stream          Start stream processing
+
+optional arguments:
+  -h, --help        show this help message and exit
 ```
 
 # 更新通知botとして起動
@@ -230,3 +233,11 @@ services:
     restart: always
     command: stream -v --ini /data/config.ini --file-log-enable
 ```
+
+### 排他制御について
+
+上記のようにSQLiteデータベースのファイルをプロセス間で共有すると，おそらく（期待される動作としては）ファイルごとロック，つまり，qkoubotのプロセスが書き込みをする間，streamプロセスはいかなる読み込みも出来ないはずです．  
+
+これは厳密に検証したわけでは無く，仕様上おそらくそうだろうという憶測で書いています．現状botの動作はそれほど遅いモノでも無く，それほど頻繁にuserstreamからのアクセスが来るわけでも内のでSQLiteでも良いとしていますが，心配ならばMySQLを使用するべきでしょう．
+
+ただしSQLiteにおいても複数プロセス間での処理は適切に行われるはずであり，それほど問題は無いと言えるかも知れません．
