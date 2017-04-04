@@ -74,7 +74,7 @@ LEC_CANCEL_TEMPLATE = "講義名：{subject}\n" \
 NEWS_ID_TEMPLATE = " #news{id}"
 NEWS_ACTION_REGEX = "(?<=news)[0-9]+"
 NEWS_TEMPLATE_WITH_LINK = "掲載日：{str_first}\n発信課: {division}\n概要: {category}\n詳細：{detail}\nリンク：{link}"
-NEWS_TEMPLATE_WITHOUT_LINK = "掲載日：{str_first}\n詳細：{detail}"
+NEWS_TEMPLATE_WITHOUT_LINK = "掲載日：{str_first}\n発信課: {division}\n概要: {category}\n詳細：{detail}"
 
 THERE_IS_NO_INFORMATION_MSG = "お問い合わせされた情報は現在存在しません．"
 DATABASE_ERROR_MSG = "DBエラーです．管理者までご連絡ください．"

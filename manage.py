@@ -5,8 +5,8 @@ from logging import getLogger
 
 def main():
     parser = argparse.ArgumentParser(
-        description="QkouBot and QkouAPI is the application for KIT students. These are automatically collect and "
-                    "redistribute information and cancellation of lecture. QkouBot detect update of information "
+        description="QkouBot is an application for KIT students. This automatically collect and "
+                    "redistribute information and cancellation of lectures. QkouBot detect update of information "
                     "and tweet it."
     )
     common_parser = argparse.ArgumentParser(add_help=False)
