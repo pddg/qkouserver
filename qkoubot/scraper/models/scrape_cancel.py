@@ -26,7 +26,7 @@ class CancelScraper(object):
         self.day = normalize("NFKC", str_args[2])
         self.week = normalize("NFKC", str_args[3])
         self.period = normalize("NFKC", str_args[4])
-        self.abstract = str_args[5]
+        self.abstract = str_args[5] + self.find_link(args[7])
         self.first = normalize("NFKC", str_args[6])
 
     @staticmethod

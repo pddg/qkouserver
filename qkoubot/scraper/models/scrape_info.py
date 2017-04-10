@@ -29,7 +29,7 @@ class InfoScraper(object):
         self.week = week_raw[0] if "曜日" in week_raw else week_raw
         self.period = normalize("NFKC", str_args[3])
         self.abstract = normalize("NFKC", str_args[4])
-        self.detail = str_args[5] + " " + self.find_link(args[5])
+        self.detail = str_args[5] + " " + self.find_link(args[8])
         self.first = normalize("NFKC", str_args[6])
         self.updated_date = normalize("NFKC", str_args[7])
 
