@@ -1,5 +1,5 @@
 import re
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, time
 from logging import getLogger
 from typing import List
 from random import choice
@@ -117,7 +117,7 @@ class TodayCancel(object):
         Return:
             ツイートする内容のリスト
         """
+        now_date = datetime.combine(now.date(), time=time())
         with Session() as session:
-            today_cancels = session.query(Cancel).filter(and_(Cancel.day > (now + timedelta(days=-1)),
-                                                              Cancel.day < (now + timedelta(days=1)))).all()
+            today_cancels = session.query(Cancel).filter(Cancel.day == now_date).all()
         return self.__convert_title_tweet(now.strftime("%Y/%m/%d"), [cancel.title for cancel in today_cancels])
