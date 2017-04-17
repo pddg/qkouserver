@@ -1,6 +1,5 @@
 from datetime import datetime, timedelta
 from typing import Union
-from sqlalchemy import and_
 from sqlalchemy.exc import IntegrityError
 from logging import getLogger
 
@@ -47,7 +46,7 @@ def update_info(data: Info) -> bool:
     """
     with Session() as sess:
         exist = sess.query(Info).filter(
-            and_(Info.unique_hash == data.unique_hash, Info.is_deleted is not True)).first()  # type: Info
+            Info.unique_hash == data.unique_hash).first()  # type: Info
         if exist.renew_hash != data.renew_hash:
             if (exist.last_confirmed - data.last_confirmed).total_seconds() < 5:
                 # 暫定処理として同一の主キーとなるに関わらず，内容が変化している項目が複数掲載された場合，変更を握りつぶす．
@@ -83,7 +82,7 @@ def delete_olds(table: T) -> bool:
         olds = session.query(table).filter(table.last_confirmed < yday).all()
         if len(olds) == 0:
             return False
-        for old in [old for old in olds if old.is_deleted]:
+        for old in [old for old in olds if not old.is_deleted]:
             logger.debug("[DELETE] " + old.__repr__())
             old.is_deleted = True
         session.commit()
