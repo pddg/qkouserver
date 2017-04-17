@@ -5,7 +5,7 @@ from logging import getLogger
 
 from qkoubot.models import Session, Info, Cancel, News
 
-T = Union[Info, Cancel, News]
+T = Union[Cancel, News]
 
 
 def add(data: T) -> bool:
@@ -27,10 +27,11 @@ def add(data: T) -> bool:
         # unique key error
         # new data and existence data in DB are duplicates.
         with Session() as sess:
+            if isinstance(data, Info):
+                return False
             exists = sess.query(data.__class__).filter_by(unique_hash=data.unique_hash).first()  # type: T
-            if not exists.is_deleted:
-                exists.last_confirmed = data.last_confirmed
-                sess.commit()
+            exists.last_confirmed = data.last_confirmed
+            sess.commit()
         return False
 
 
@@ -61,6 +62,8 @@ def update_info(data: Info) -> bool:
             return True
         else:
             # There is no update.
+            exist.last_confirmed = datetime.now()
+            sess.commit()
             return False
 
 
