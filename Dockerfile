@@ -6,7 +6,7 @@ ENV DATA_DIR /data
 ENV PRJ_PATH /srv/qkouserver
 ENV SQLITE_PATH ${DATA_DIR}
 
-RUN apk --update add gcc \
+RUN apk --update add --virtual --no-cache gcc \
     g++ \
     python3 \
     python3-dev \

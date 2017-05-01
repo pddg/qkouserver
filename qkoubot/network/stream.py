@@ -57,6 +57,9 @@ class StreamReceiverProcess(Process):
             try:
                 self.logger.info('Try to start receiving stream...')
                 stream.userstream()
+            except KeyboardInterrupt:
+                self.logger.info("[END StreamReceiveProcess] Receive keyboard interrupt.")
+                exit()
             except Exception as e:
                 self.logger.exception(e.args)
                 time.sleep(30)

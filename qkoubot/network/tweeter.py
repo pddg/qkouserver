@@ -1,6 +1,6 @@
 from multiprocessing import Queue
 from queue import Empty
-from threading import Thread
+from multiprocessing import Process
 from logging import getLogger
 
 import tweepy
@@ -40,7 +40,7 @@ class GetAuth(object):
         return auth
 
 
-class TweetThread(Thread):
+class TweetProcess(Process):
     """
     This class' instance has Queue when created. Queue has tweet information. So tweet it until Queue become empty.
     """
@@ -50,11 +50,11 @@ class TweetThread(Thread):
         Args:
             que: queue.Queue object
         """
-        super(TweetThread, self).__init__()
+        super(TweetProcess, self).__init__()
+        self.logger = getLogger(__name__)
         self.queue = que
         self.daemon = True
         self.get_auth = GetAuth()
-        self.logger = getLogger(__name__)
         self.tweetable = False
 
     def run(self) -> None:
@@ -66,11 +66,14 @@ class TweetThread(Thread):
                 data = self.queue.get()
                 if data is None:
                     break
+                self.logger.debug("[TWEET] " + data)
                 if self.tweetable:
-                    self.logger.debug("[TWEET] " + data)
                     self.get_auth.api.update_status(status=data)
-            except Empty:
-                break
+            except KeyboardInterrupt:
+                pass
+            # except Empty:
+            #     break
             except Exception as e:
                 self.logger.exception(e)
         self.logger.info("[END TweetThread]")
+        exit()

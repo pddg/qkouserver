@@ -4,21 +4,18 @@ from logging import getLogger
 from typing import List
 from random import choice
 from multiprocessing import Queue
-from sqlalchemy import and_
 import tweepy
 
 from .jholiday import holiday_name
 from qkoubot.models import Cancel, Session
 from qkoubot.network import GetAuth
-from static import DAILY_TWEET_HOUR, TODAY_CANCEL_TEMPLATE, TODAY_CANCEL_TEMPLATE_CONTINUE, \
+from static import TODAY_CANCEL_TEMPLATE, TODAY_CANCEL_TEMPLATE_CONTINUE, \
     HOLIDAY_MSG_ARRAY, TODAY_IS_HOLIDAY_TEMPLATE, TODAY_CANCEL_NONE_TEMPLATE
 
 
 class TodayCancel(object):
 
     def __init__(self, queue: Queue):
-        self.last_tweet_date = datetime.now()
-        self.today_job_is_done = False
         self.auth = GetAuth()
         self.api = self.auth.api
         self.queue = queue
@@ -58,26 +55,18 @@ class TodayCancel(object):
 
     def tweet_today_cancel(self) -> None:
         now = datetime.now()
-        if self.tweetable and now.hour == DAILY_TWEET_HOUR and not self.today_job_is_done:
-            if self.__del_yday_tweet():
-                self.logger.debug("Deleted daily tweet of yesterday.")
-            else:
-                self.logger.warning("Could't find daily tweet of yesterday. Please confirm.")
-            holiday = holiday_name(now.year, now.month, now.day)
-            if holiday is None:
-                contents = self.__get_sentence(now)
-                for content in contents:
-                    self.queue.put(content)
-            else:
-                content = TODAY_IS_HOLIDAY_TEMPLATE.format(date=now.strftime("%Y/%m/%d"),
-                                                           holiday_name=holiday, msg=choice(HOLIDAY_MSG_ARRAY))
+        if self.__del_yday_tweet():
+            self.logger.debug("Deleted daily tweet of yesterday.")
+        else:
+            self.logger.warning("Could't find daily tweet of yesterday. Please confirm.")
+        holiday = holiday_name(now.year, now.month, now.day)
+        if holiday is None:
+            for content in self.__get_sentence(now):
                 self.queue.put(content)
-            self.today_job_is_done = True
-            self.last_tweet_date = now
-        passed_hour = (now - self.last_tweet_date).total_seconds() / 3600
-        if passed_hour > 20:
-            self.logger.debug("Make next day's cron job enable.")
-            self.today_job_is_done = False
+        else:
+            content = TODAY_IS_HOLIDAY_TEMPLATE.format(date=now.strftime("%Y/%m/%d"),
+                                                       holiday_name=holiday, msg=choice(HOLIDAY_MSG_ARRAY))
+            self.queue.put(content)
 
     @staticmethod
     def __convert_title_tweet(date: str, title_list: List[str]) -> List[str]:

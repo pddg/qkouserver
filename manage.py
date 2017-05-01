@@ -65,6 +65,16 @@ def main():
 
     stream_parser = sub_parser.add_parser("stream", help="Start stream processing", parents=[common_parser])
     stream_parser.set_defaults(func=stream)
+
+    today_job_parser = sub_parser.add_parser("dailyjob", help="Run daily job", parents=[common_parser])
+    today_job_parser.add_argument("-t",
+                                  "--tweet",
+                                  dest="tweet",
+                                  default=False,
+                                  help="Enable tweet update of any information.",
+                                  action="store_true"
+                                  )
+    today_job_parser.set_defaults(func=daily_job)
     args = parser.parse_args()
     if args.ini is not None:
         config_parse(args.ini)
@@ -73,8 +83,9 @@ def main():
 
 def bot(args):
     from log_modules import log_listener_process, configure_queue_logger
-    from qkoubot import cron_process
-    log_queue = Queue(-1)
+    from qkoubot import cron_process, TweetProcess
+    log_queue = Queue()
+    tweet_queue = Queue()
     log_listener = Process(target=log_listener_process,
                            args=(log_queue, args.log_level[0], args.verbose, args.file_log, args.log_path),
                            name="LogListenerProcess")
@@ -82,51 +93,91 @@ def bot(args):
     configure_queue_logger(queue=log_queue)
     logger = getLogger("Manage")
     logger.info("launching on QkouBot")
+    tweet_process = TweetProcess(tweet_queue)
+    tweet_process.tweetable = args.tweet
+    tweet_process.start()
     try:
-        cron_process(args.tweet, args.without_f)
+        cron_process(args.without_f, tweet_queue)
     except KeyboardInterrupt:
-        log_listener.join()
         from static import TESTING
         if TESTING:
             from qkoubot.models import Base, engine
+            logger.info("Dropping Database ...")
             Base.metadata.drop_all(engine)
-            logger.info("Database was dropped.")
-        exit()
+            logger.info("Complete.")
     except (AssertionError, FileNotFoundError, KeyError) as e:
         logger.exception(e.args)
-        exit()
     except Exception as e:
         logger.exception(e.args)
+    finally:
+        tweet_queue.put(None)
+        tweet_process.join()
+        log_queue.put(None)
+        log_listener.join()
+        exit()
 
 
 def stream(args):
     from log_modules import log_listener_process, configure_queue_logger
-    from qkoubot import stream_process
-    jobs = []
+    from qkoubot import stream_process, GetAuth, StreamReceiverProcess
     log_queue = Queue(-1)
     log_listener = Process(target=log_listener_process,
                            args=(log_queue, args.log_level[0], args.verbose, args.file_log, args.log_path),
                            name="LogListenerProcess")
-    jobs.append(log_listener)
     log_listener.start()
     configure_queue_logger(queue=log_queue)
     logger = getLogger("Manage")
     logger.info("launching on QkouBot Stream Process")
+    status_queue = Queue()
+    auth = GetAuth()
+    stream_receive_process = StreamReceiverProcess(status_queue, auth)
+    stream_receive_process.start()
     try:
-        stream_process()
+        stream_process(status_queue=status_queue, auth=auth)
     except KeyboardInterrupt:
-        log_listener.join()
         from static import TESTING
         if TESTING:
             from qkoubot.models import Base, engine
             Base.metadata.drop_all(engine)
             logger.info("Database was dropped.")
-        exit()
     except (AssertionError, FileNotFoundError, KeyError) as e:
         logger.exception(e.args)
-        exit()
     except Exception as e:
         logger.exception(e.args)
+    finally:
+        log_queue.put(None)
+        log_listener.join()
+        exit()
+
+
+def daily_job(args):
+    import time
+    time.sleep(30)
+    from log_modules import log_listener_process, configure_queue_logger
+    from qkoubot import today_cancel_tweet, TweetProcess
+    log_queue = Queue()
+    tweet_queue = Queue()
+    log_listener = Process(target=log_listener_process,
+                           args=(log_queue, args.log_level[0], args.verbose, args.file_log, args.log_path),
+                           name="LogListenerProcess")
+    log_listener.start()
+    configure_queue_logger(log_queue)
+    logger = getLogger(__name__)
+    tweet_process = TweetProcess(tweet_queue)
+    tweet_process.tweetable = args.tweet
+    tweet_process.start()
+    try:
+        today_cancel_tweet(tweet_queue)
+    except KeyboardInterrupt:
+        pass
+    except Exception as e:
+        logger.exception(e)
+    finally:
+        tweet_queue.put(None)
+        tweet_process.join()
+        log_queue.put(None)
+        log_listener.join()
+        exit()
 
 
 def config_parse(path: str) -> None:

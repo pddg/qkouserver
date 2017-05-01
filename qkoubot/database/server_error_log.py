@@ -18,63 +18,49 @@ class LoginFailureLog(object):
         self.tweetable = False
         self.logger = getLogger("LoginFailureLogger")
         self.queue = queue
-        self.newest_failure = self.get_newest_failure()  # type: Optional[ServerErrorLog]
-        # 初期化時に古すぎるデータを無かったことにする
-        if self.newest_failure is not None \
-                and (self.last_confirmed - self.newest_failure.last_confirmed).total_seconds() > 3600:
-            with Session() as session:
-                session.add(self.newest_failure)
-                self.newest_failure.is_fixed = True
-                session.commit()
-        self.current_status = self.newest_failure.is_fixed if self.newest_failure is not None else True
+        self.newest_failure = self.__get_newest_failure()  # type: ServerErrorLog
 
-    @staticmethod
-    def get_newest_failure() -> Optional[ServerErrorLog]:
+    def __get_newest_failure(self) -> ServerErrorLog:
         """
         最新のログイン失敗情報を取得．
         Returns:
             最新のログイン失敗情報．無ければNoneを返す．
         """
+        def init() -> ServerErrorLog:
+            """新しいサーバログオブジェクトを返す"""
+            new = ServerErrorLog("init", created_at=self.last_confirmed)
+            new.is_fixed = True
+            session.add(new)
+            session.commit()
+            return new
         with Session() as session:
             newest = session.query(ServerErrorLog)\
                 .order_by(desc(ServerErrorLog.created_at))\
-                .filter(ServerErrorLog.is_fixed is False)\
                 .limit(1).first()  # type: Optional[ServerErrorLog]
-        return newest
+            if newest is None:
+                self.logger.debug("Create new ServerErrorLog object.")
+                return init()
+            elif (self.last_confirmed - newest.last_confirmed).total_seconds() > 3600:
+                # 古いデータは無かったことにする．
+                self.logger.debug("Reset ServerErrorLog object. Last confirmation is 3600 seconds ago.")
+                return init()
+            else:
+                return newest
 
-    def error_occurs(self, e: str):
-        """
-        エラー発生時に呼ばれる関数．
-        current_statusに応じて新規作成または既存情報を更新．場合に応じてツイートするためにQueueに追加する．
-
-        Args:
-            e: Exceptionの中身
-        """
-        self.last_confirmed = datetime.now()
-        do_tweet = self.create_new_failure_log(e, created_at=self.last_confirmed) if self.current_status else self.update_failure_log()
-        if do_tweet and self.tweetable:
-            self.queue.put(str(self.newest_failure))
-        self.current_status = False
-        self.logger.warning(self.newest_failure.__repr__())
-
-    def create_new_failure_log(self, e: str, created_at: datetime) -> bool:
+    def __create_new_failure_log(self, e: str):
         """
         新規情報の作成．
 
         Args:
             e: Exceptionの中身
-            created_at: 障害発生日時
-        Returns:
-            True
         """
         with Session() as session:
-            latest = ServerErrorLog(e, created_at=created_at)
+            latest = ServerErrorLog(e, created_at=self.last_confirmed)
             session.add(latest)
             session.commit()
         self.newest_failure = latest
-        return True
 
-    def update_failure_log(self) -> bool:
+    def __update_failure_log(self) -> bool:
         """
         ログイン失敗情報をアップデートする．
 
@@ -94,19 +80,40 @@ class LoginFailureLog(object):
 
     def set_fixed(self):
         """
-        ログインに成功したときに呼ばれる．last_confirmedは必ず更新される．
+        ログインに成功したときに呼ばれる．
         """
         now = datetime.now()
-        self.last_confirmed = now
-        if self.current_status is False:
-            self.current_status = True
-            with Session() as session:
-                session.add(self.newest_failure)
+        with Session() as session:
+            session.add(self.newest_failure)
+            if self.newest_failure.is_fixed:
+                self.logger.debug("All login and scraping process are success.")
+                self.newest_failure.last_confirmed = now
+            else:
+                self.logger.info("[RECOVERED] Error has been recovered at {t}"
+                                 .format(t=now.strftime("%Y/%m/%d %H:%M:%S")))
                 self.newest_failure.is_fixed = True
                 self.newest_failure.fixed_at = now
                 self.newest_failure.last_confirmed = now
                 self.newest_failure.tweeted_at = now
-                session.commit()
-            if self.tweetable:
-                self.queue.put(str(self.newest_failure))
-            self.logger.info(self.newest_failure.__repr__())
+                if self.tweetable:
+                    self.queue.put(str(self.newest_failure))
+            session.commit()
+
+    def error_occurs(self, e: str):
+        """
+        エラー発生時に呼ばれる関数．
+        最新のServerErrorLog.is_fixedに応じて新規作成または既存情報を更新．場合に応じてツイートするためにQueueに追加する．
+
+        Args:
+            e: Exceptionの中身
+        """
+        self.logger.warning("[ERROR] Login or scraping failure occurs.")
+        self.last_confirmed = datetime.now()
+        if self.newest_failure.is_fixed:
+            self.__create_new_failure_log(e)
+            update = True
+        else:
+            update = self.__update_failure_log()
+        if self.tweetable and update:
+            self.queue.put(str(self.newest_failure))
+        self.logger.warning(self.newest_failure.__repr__())

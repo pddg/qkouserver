@@ -61,7 +61,7 @@ def update_info(data: Info) -> bool:
             exist.renew_hash = data.renew_hash
             exist.last_confirmed = datetime.now()
             sess.commit()
-            return True
+            return data.id
         else:
             # There is no update.
             exist.last_confirmed = datetime.now()
@@ -82,12 +82,12 @@ def delete_olds(table: Type[T]) -> bool:
     logger = getLogger("DeleteOld")
     with Session() as session:
         yday = datetime.now() - timedelta(days=1)
-        logger.debug("Delete data confirmed finally more than {date} before"
-                     .format(date=yday.strftime("%Y/%m/%d %H:%M")))
-        olds = session.query(table).filter(table.last_confirmed < yday).all()
+        logger.debug("Delete '{table}' data confirmed finally more than '{date}' before"
+                     .format(table=table.__tablename__, date=yday.strftime("%Y/%m/%d %H:%M")))
+        olds = [old for old in session.query(table).filter(table.last_confirmed < yday).all() if not old.is_deleted]
         if len(olds) == 0:
             return False
-        for old in [old for old in olds if not old.is_deleted]:
+        for old in olds:
             logger.debug("[DELETE] " + old.__repr__())
             old.is_deleted = True
         session.commit()
