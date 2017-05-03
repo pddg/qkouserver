@@ -75,5 +75,5 @@ class TweetProcess(Process):
             #     break
             except Exception as e:
                 self.logger.exception(e)
-        self.logger.info("[END TweetThread]")
+        self.logger.info("[Finish TweetThread]")
         exit()

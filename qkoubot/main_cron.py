@@ -56,14 +56,14 @@ def cron_process(failure_tweet: bool, tweet_queue: Queue):
     except Exception as e:
         logger.exception(e.args)
     finally:
-        logger.info("Finish cron process at {t}.".format(t=datetime.now().strftime("%Y/%m/%d %H:%M:%S")))
+        logger.info("[Finish CronProcess at {t}]".format(t=datetime.now().strftime("%Y/%m/%d %H:%M:%S")))
 
 
 def today_cancel_tweet(tweet_queue: Queue):
     tweet_vars_validate()
     Base.metadata.create_all(engine)
     logger = getLogger(__name__)
-    logger.debug("[Start daily job]")
+    logger.debug("[Start DailyJob]")
     try:
         daily_job = TodayCancel(tweet_queue)
         daily_job.tweet_today_cancel()
@@ -74,4 +74,4 @@ def today_cancel_tweet(tweet_queue: Queue):
     except Exception as e:
         logger.exception(e)
     finally:
-        logger.info("[END Daily Job]")
+        logger.info("[Finish DailyJob at {t}]".format(t=datetime.now().strftime("%Y/%m/%d %H:%M:%S")))
