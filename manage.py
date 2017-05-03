@@ -87,7 +87,7 @@ def bot(args):
     log_queue = Queue()
     tweet_queue = Queue()
     log_listener = Process(target=log_listener_process,
-                           args=(log_queue, args.log_level[0], args.verbose, args.file_log, args.log_path),
+                           args=(log_queue, args.log_level[0], args.verbose, args.file_log, args.log_path, "bot"),
                            name="LogListenerProcess")
     log_listener.start()
     configure_queue_logger(queue=log_queue)
@@ -122,7 +122,7 @@ def stream(args):
     from qkoubot import stream_process, GetAuth, StreamReceiverProcess
     log_queue = Queue(-1)
     log_listener = Process(target=log_listener_process,
-                           args=(log_queue, args.log_level[0], args.verbose, args.file_log, args.log_path),
+                           args=(log_queue, args.log_level[0], args.verbose, args.file_log, args.log_path, "stream"),
                            name="LogListenerProcess")
     log_listener.start()
     configure_queue_logger(queue=log_queue)
@@ -158,7 +158,7 @@ def daily_job(args):
     log_queue = Queue()
     tweet_queue = Queue()
     log_listener = Process(target=log_listener_process,
-                           args=(log_queue, args.log_level[0], args.verbose, args.file_log, args.log_path),
+                           args=(log_queue, args.log_level[0], args.verbose, args.file_log, args.log_path, "daily"),
                            name="LogListenerProcess")
     log_listener.start()
     configure_queue_logger(log_queue)
