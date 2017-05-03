@@ -6,6 +6,7 @@ DAILY_MODE="dailyjob"
 USAGE_MODE="-h"
 CRONTAB="/var/spool/cron/crontabs/root"
 ARGS="$@"
+WORK_DIR="/srv/qkouserver/"
 
 # initialization
 if [ -z ${SCRAPING_INTERVAL} ] ; then
@@ -88,9 +89,9 @@ fi
 
 case "$1" in
     ${BOT_MODE})
-        startCronJob "QkouBot" "${ARGS}" "*/${INTERVAL_MIN} * * * * source /env;python3 manage.py ${ARGS}" ;;
+        startCronJob "QkouBot" "${ARGS}" "*/${INTERVAL_MIN} * * * * source /env;cd ${WORK_DIR} && python3 manage.py ${ARGS}" ;;
     ${DAILY_MODE})
-        startCronJob "DailyJob" "${ARGS}" "0 ${DAILY_JOB_HOUR} * * * source /env;python3 manage.py ${ARGS}" ;;
+        startCronJob "DailyJob" "${ARGS}" "0 ${DAILY_JOB_HOUR} * * * source /env;cd ${WORK_DIR} && python3 manage.py ${ARGS}" ;;
     ${STREAM_MODE})
         startStream "$@" ;;
     ${USAGE_MODE})
