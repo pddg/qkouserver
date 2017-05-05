@@ -19,6 +19,11 @@ if [ -z ${DAILY_TWEET_HOUR} ] ; then
     DAILY_TWEET_HOUR=7
 fi
 
+if [ -z ${INITIALIZE} ] ; then
+    echo "Parameter 'INITIALIZE' is not given. Use default value 'true'."
+    INITIALIZE="true"
+fi
+
 DAILY_JOB_HOUR=${DAILY_TWEET_HOUR}
 REMNANT=$((${SCRAPING_INTERVAL} % 60))
 INTERVAL_MIN=`expr ${SCRAPING_INTERVAL} / 60`
@@ -79,17 +84,31 @@ startStream () {
 }
 
 # validation
-if `expr ${DAILY_TWEET_HOUR} \<= 0 > /dev/null` || `expr ${DAILY_TWEET_HOUR} \>= 24 > /dev/null` ; then
-    showVariableError "DAILY_TWEET_HOUR" "It must be 0 ~ 24.\nGiven: ${DAILY_TWEET_HOUR}\nExample: 7"
+if `expr ${DAILY_TWEET_HOUR} \<= 0 > /dev/null` || `expr ${DAILY_TWEET_HOUR} \>= 23 > /dev/null` ; then
+    showVariableError "DAILY_TWEET_HOUR" "It must be 0 ~ 23.\nGiven: ${DAILY_TWEET_HOUR}\nExpect: 7"
 fi
 
 if `expr ${REMNANT} != 0  > /dev/null` || `expr ${SCRAPING_INTERVAL} = 0  > /dev/null`; then
-    showVariableError "SCRAPING_INTERVAL" "It should be dividable by 60 and above 0.\nGiven: ${SCRAPING_INTERVAL}\nExample: 300"
+    showVariableError "SCRAPING_INTERVAL" "It should be dividable by 60 and above 0.\nGiven: ${SCRAPING_INTERVAL}\nExpect: 300"
+fi
+
+INITIALIZE_LOWER=`echo ${INITIALIZE} | tr "[:upper:]" "[:lower:]"`
+if test ${INITIALIZE_LOWER} != "true" && test ${INITIALIZE} != "false"; then
+    showVariableError "INITIALIZE" "May be typo. It should be 'true' or 'false' or its upper text only.\nGiven: ${INITIALIZE}\nExpect: true"
 fi
 
 case "$1" in
     ${BOT_MODE})
-        startCronJob "QkouBot" "${ARGS}" "*/${INTERVAL_MIN} * * * * source /env;cd ${WORK_DIR} && python3 manage.py ${ARGS}" ;;
+        if test ${INITIALIZE_LOWER} == "true"; then
+            DISABLE_TWEET=`echo ${ARGS} | sed -e "s/-t //" | sed -e "s/-l [0-9]/-l 3/"`
+            echo "Run qkoubot to initialize database. if you allow bot to tweet, it automatically be disallowed temporarily."
+            echo "Run with: \n\t${DISABLE_TWEET}"
+            echo "Start qkoubot..."
+            python3 manage.py ${DISABLE_TWEET}
+            echo "Initializing database was success."
+        fi
+        startCronJob "QkouBot" "${ARGS}" "*/${INTERVAL_MIN} * * * * source /env;cd ${WORK_DIR} && python3 manage.py ${ARGS}"
+        ;;
     ${DAILY_MODE})
         startCronJob "DailyJob" "${ARGS}" "0 ${DAILY_JOB_HOUR} * * * source /env;cd ${WORK_DIR} && python3 manage.py ${ARGS}" ;;
     ${STREAM_MODE})
