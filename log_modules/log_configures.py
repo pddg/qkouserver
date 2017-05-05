@@ -1,5 +1,5 @@
 from logging import getLogger, StreamHandler, Formatter, DEBUG, INFO, WARNING
-from logging.handlers import QueueHandler, TimedRotatingFileHandler
+from logging.handlers import QueueHandler, RotatingFileHandler
 from multiprocessing import Queue
 import sys
 
@@ -36,19 +36,11 @@ def configure_logger(log_level: int, echo: bool=True, file_log: bool=False, file
                           "Last character is must not be `/`.".format(path=file_path))
         debug_log_file = file_path + "/" + prefix + "-debug.log"
         error_log_file = file_path + "/" + prefix + "-error.log"
-        rotate_debug_handler = TimedRotatingFileHandler(
-            filename=debug_log_file,
-            when="D",
-            backupCount=5
-        )
+        rotate_debug_handler = RotatingFileHandler(debug_log_file, "a+", (2*1024*1024), 5)
         rotate_debug_handler.setFormatter(Formatter(LOG_FORMAT))
         rotate_debug_handler.setLevel(DEBUG)
         logger.addHandler(rotate_debug_handler)
-        rotate_warn_handler = TimedRotatingFileHandler(
-            filename=error_log_file,
-            when="D",
-            backupCount=5
-        )
+        rotate_warn_handler = RotatingFileHandler(error_log_file, "a+", (2*1024*1024), 5)
         rotate_warn_handler.setFormatter(Formatter(LOG_FORMAT))
         rotate_warn_handler.setLevel(WARNING)
         logger.addHandler(rotate_warn_handler)
