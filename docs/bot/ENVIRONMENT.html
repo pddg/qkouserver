@@ -464,26 +464,19 @@ OK
 <h3 id="1-&#x30A4;&#x30E1;&#x30FC;&#x30B8;&#x3092;pull">1. &#x30A4;&#x30E1;&#x30FC;&#x30B8;&#x3092;pull</h3>
 <pre><code class="lang-bash">$ docker pull pddg/qkouserver:latest
 $ docker run --rm pddg/qkouserver:latest
-usage: manage.py [-h] {qkoubot,stream} ...
-
-QkouBot is an application <span class="hljs-keyword">for</span> KIT students. This automatically collect and
-redistribute information and cancellation of lectures. QkouBot detect update
-of information and tweet it.
-
-positional arguments:
-  {qkoubot,stream}  sub commands <span class="hljs-built_in">help</span>
-    qkoubot         Start QkouBot <span class="hljs-built_in">command</span>
-    stream          Start stream processing
-
-optional arguments:
-  -h, --help        show this <span class="hljs-built_in">help</span> message and <span class="hljs-built_in">exit</span>
-</code></pre>
+how usage <span class="hljs-keyword">for</span> this script.
+Options:
+        -h      show this message.
+Commands:
+        qkoubot         Setup qkoubot with cron.
+        dailyjob        Setup qkoubot<span class="hljs-string">&apos;s daily job with cron.
+        stream          Start streaming processing.
+</span></code></pre>
 <h3 id="2-twitter&#x306E;&#x8A8D;&#x8A3C;&#x60C5;&#x5831;&#x3084;&#x5B66;&#x751F;&#x756A;&#x53F7;&#x7B49;&#x3092;&#x5165;&#x529B;">2. Twitter&#x306E;&#x8A8D;&#x8A3C;&#x60C5;&#x5831;&#x3084;&#x5B66;&#x751F;&#x756A;&#x53F7;&#x7B49;&#x3092;&#x5165;&#x529B;</h3>
 <p><code>docker-compose.yml</code>&#x3092;&#x7F6E;&#x304F;&#x30C7;&#x30A3;&#x30EC;&#x30AF;&#x30C8;&#x30EA;&#x3092;&#x9069;&#x5F53;&#x306B;&#x6C7A;&#x3081;&#x307E;&#x3059;&#xFF0E;&#x4ECA;&#x56DE;&#x306F;&#x30E6;&#x30FC;&#x30B6;&#x306E;&#x30DB;&#x30FC;&#x30E0;&#x30C7;&#x30A3;&#x30EC;&#x30AF;&#x30C8;&#x30EA;&#x4EE5;&#x4E0B;&#x306B;<code>containers/qkoubot</code>&#x3092;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;&#xFF0E;</p>
 <pre><code class="lang-bash">$ mkdir containers/qkoubot
 $ mkdir data
-$ mkdir bot_<span class="hljs-built_in">log</span>
-$ mkdir stream_<span class="hljs-built_in">log</span>
+$ mkdir <span class="hljs-built_in">log</span>
 $ curl https://raw.githubusercontent.com/pddg/qkouserver/master/config.ini.sample &gt; data/config.ini
 $ vim data/config.ini
 </code></pre>
@@ -497,7 +490,7 @@ $ vim data/config.ini
 <span class="hljs-attr">    image:</span> pddg/qkouserver:latest
 <span class="hljs-attr">    volumes:</span>
 <span class="hljs-bullet">      -</span> ./data:/data
-<span class="hljs-bullet">      -</span> ./bot_log:/srv/qkouserver/log
+<span class="hljs-bullet">      -</span> ./log:/srv/qkouserver/log
 <span class="hljs-attr">    command:</span> qkoubot -v -t --ini /data/config.ini --file-log-enable
 <span class="hljs-attr">    restart:</span> always
 <span class="hljs-attr">  qkoustream:</span>
@@ -505,15 +498,14 @@ $ vim data/config.ini
 <span class="hljs-attr">    image:</span> pddg/qkouserver:latest
 <span class="hljs-attr">    volumes:</span>
 <span class="hljs-bullet">      -</span> ./data:/data
-<span class="hljs-bullet">      -</span> ./stream_log:/srv/qkouserver/log
-<span class="hljs-attr">        tag:</span> qkoustream
+<span class="hljs-bullet">      -</span> ./log:/srv/qkouserver/log
 <span class="hljs-attr">    restart:</span> always
 <span class="hljs-attr">    command:</span> stream -v --ini /data/config.ini --file-log-enable
 </code></pre>
 <h3 id="4-&#x8D77;&#x52D5;">4. &#x8D77;&#x52D5;</h3>
 <pre><code class="lang-bash">$ docker-compose up <span class="hljs-_">-d</span>
 </code></pre>
-<p>&#x4E00;&#x56DE;&#x76EE;&#x306E;&#x8A66;&#x884C;&#x3067;&#x306F;&#x30C4;&#x30A4;&#x30FC;&#x30C8;&#x6A5F;&#x80FD;&#x306F;&#x7121;&#x52B9;&#x306B;&#x306A;&#x3063;&#x3066;&#x3044;&#x307E;&#x3059;&#xFF0E;&#x4E00;&#x5EA6;&#x30C7;&#x30FC;&#x30BF;&#x30D9;&#x30FC;&#x30B9;&#x3092;&#x4F5C;&#x6210;&#x3059;&#x308B;&#x3068;&#xFF0C;&#x4EE5;&#x964D;&#x505C;&#x6B62;&#x3059;&#x308B;&#x307E;&#x3067;&#x30C7;&#x30FC;&#x30BF;&#x306E;&#x66F4;&#x65B0;&#x30FB;&#x30C4;&#x30A4;&#x30FC;&#x30C8;&#x3092;&#x7D99;&#x7D9A;&#x3057;&#x307E;&#x3059;&#xFF0E;</p>
+<p><code>INITIALIZE</code>&#x30D5;&#x30E9;&#x30B0;&#x3092;&#x5EFA;&#x3066;&#x306A;&#x3044;&#x9650;&#x308A;&#xFF0C;crontab&#x3078;&#x306E;&#x30B8;&#x30E7;&#x30D6;&#x306E;&#x767B;&#x9332;&#x524D;&#x306B;&#x4E00;&#x5EA6;&#x30C4;&#x30A4;&#x30FC;&#x30C8;&#x6A5F;&#x80FD;&#x3092;&#x7121;&#x52B9;&#x306B;&#x3057;&#x3066;&#x30C7;&#x30FC;&#x30BF;&#x30D9;&#x30FC;&#x30B9;&#x3092;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;&#xFF0E;&#x305D;&#x306E;&#x305F;&#x3081;&#xFF0C;&#x4E8C;&#x56DE;&#x76EE;&#x4EE5;&#x964D;&#x306E;&#x8D77;&#x52D5;&#x3067;&#x306F;&#x4EE5;&#x4E0B;&#x306E;&#x69D8;&#x306B;&#x30D5;&#x30E9;&#x30B0;&#x3092;&#x5EFA;&#x3066;&#x308B;&#x3053;&#x3068;&#x3067;&#x3053;&#x308C;&#x3092;&#x56DE;&#x907F;&#x51FA;&#x6765;&#x307E;&#x3059;&#xFF0E;</p>
 <h3 id="&#x4E8C;&#x56DE;&#x76EE;&#x4EE5;&#x964D;&#x306E;&#x8D77;&#x52D5;">&#x4E8C;&#x56DE;&#x76EE;&#x4EE5;&#x964D;&#x306E;&#x8D77;&#x52D5;</h3>
 <p><code>docker-compose.yml</code>&#x306B;&#x304A;&#x3044;&#x3066;qkoubot&#x306B;&#x74B0;&#x5883;&#x5909;&#x6570;&#x3092;&#x8FFD;&#x52A0;&#x3057;&#x307E;&#x3059;&#xFF0E;</p>
 <pre><code class="lang-yaml"><span class="hljs-comment"># &#x7701;&#x7565;</span>
@@ -523,7 +515,7 @@ $ vim data/config.ini
 <span class="hljs-attr">    INITIALIZE:</span> <span class="hljs-string">&quot;false&quot;</span>
 <span class="hljs-comment"># &#x7701;&#x7565;</span>
 </code></pre>
-<p>&#x3053;&#x308C;&#x306B;&#x3088;&#x308A;&#x6700;&#x521D;&#x306E;&#x5B9F;&#x884C;&#x6642;&#x304B;&#x3089;&#x30C4;&#x30A4;&#x30FC;&#x30C8;&#x304C;&#x6709;&#x52B9;&#x5316;&#x3055;&#x308C;&#x307E;&#x3059;&#xFF0E;</p>
+<p>&#x3053;&#x308C;&#x306B;&#x3088;&#x308A;&#x6700;&#x521D;&#x306E;&#x30C7;&#x30FC;&#x30BF;&#x30D9;&#x30FC;&#x30B9;&#x4F5C;&#x6210;&#x30D7;&#x30ED;&#x30BB;&#x30B9;&#x304C;&#x7701;&#x304B;&#x308C;&#x307E;&#x3059;&#xFF0E;</p>
 <h2 id="&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x306E;&#x30D3;&#x30EB;&#x30C9;">&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x306E;&#x30D3;&#x30EB;&#x30C9;</h2>
 <p>&#x30EA;&#x30DD;&#x30B8;&#x30C8;&#x30EA;&#x306B;&#x65E2;&#x306B;<code>Dockerfile</code>&#x304C;&#x542B;&#x307E;&#x308C;&#x3066;&#x3044;&#x307E;&#x3059;&#xFF0E;&#x30D9;&#x30FC;&#x30B9;&#x30A4;&#x30E1;&#x30FC;&#x30B8;&#x306F;<code>alpine:3.5</code>&#x3067;&#x3059;&#xFF0E;</p>
 <pre><code class="lang-bash">$ git <span class="hljs-built_in">clone</span> https://github.com/pddg/qkouserver.git qkouserver
@@ -572,7 +564,7 @@ $ docker build ./qkouserver
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"環境構築","level":"2.2","depth":1,"next":{"title":"開発環境の構築","level":"2.2.1","depth":2,"anchor":"#開発環境の構築","path":"bot/ENVIRONMENT.md","ref":"./bot/ENVIRONMENT.md#開発環境の構築","articles":[]},"previous":{"title":"About","level":"2.1","depth":1,"path":"bot/README.md","ref":"./bot/README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["toc"],"pluginsConfig":{"toc":{"addClass":true,"className":"toc"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"bot/ENVIRONMENT.md","mtime":"2017-04-04T07:08:16.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-04-04T07:10:41.706Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"環境構築","level":"2.2","depth":1,"next":{"title":"開発環境の構築","level":"2.2.1","depth":2,"anchor":"#開発環境の構築","path":"bot/ENVIRONMENT.md","ref":"./bot/ENVIRONMENT.md#開発環境の構築","articles":[]},"previous":{"title":"About","level":"2.1","depth":1,"path":"bot/README.md","ref":"./bot/README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["toc"],"pluginsConfig":{"toc":{"addClass":true,"className":"toc"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"bot/ENVIRONMENT.md","mtime":"2017-05-08T12:30:27.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-05-08T12:31:14.654Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

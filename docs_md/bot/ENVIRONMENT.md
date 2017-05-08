@@ -169,19 +169,13 @@ Docker，およびdocker-composeはインストール済みであるとします
 ```bash
 $ docker pull pddg/qkouserver:latest
 $ docker run --rm pddg/qkouserver:latest
-usage: manage.py [-h] {qkoubot,stream} ...
-
-QkouBot is an application for KIT students. This automatically collect and
-redistribute information and cancellation of lectures. QkouBot detect update
-of information and tweet it.
-
-positional arguments:
-  {qkoubot,stream}  sub commands help
-    qkoubot         Start QkouBot command
-    stream          Start stream processing
-
-optional arguments:
-  -h, --help        show this help message and exit
+how usage for this script.
+Options:
+        -h      show this message.
+Commands:
+        qkoubot         Setup qkoubot with cron.
+        dailyjob        Setup qkoubot's daily job with cron.
+        stream          Start streaming processing.
 ```
 
 ### 2. Twitterの認証情報や学生番号等を入力
@@ -191,8 +185,7 @@ optional arguments:
 ```bash
 $ mkdir containers/qkoubot
 $ mkdir data
-$ mkdir bot_log
-$ mkdir stream_log
+$ mkdir log
 $ curl https://raw.githubusercontent.com/pddg/qkouserver/master/config.ini.sample > data/config.ini
 $ vim data/config.ini
 ```
@@ -211,7 +204,7 @@ services:
     image: pddg/qkouserver:latest
     volumes:
       - ./data:/data
-      - ./bot_log:/srv/qkouserver/log
+      - ./log:/srv/qkouserver/log
     command: qkoubot -v -t --ini /data/config.ini --file-log-enable
     restart: always
   qkoustream:
@@ -219,8 +212,7 @@ services:
     image: pddg/qkouserver:latest
     volumes:
       - ./data:/data
-      - ./stream_log:/srv/qkouserver/log
-        tag: qkoustream
+      - ./log:/srv/qkouserver/log
     restart: always
     command: stream -v --ini /data/config.ini --file-log-enable
 ```
@@ -231,7 +223,7 @@ services:
 $ docker-compose up -d
 ```
 
-一回目の試行ではツイート機能は無効になっています．一度データベースを作成すると，以降停止するまでデータの更新・ツイートを継続します．
+`INITIALIZE`フラグを建てない限り，crontabへのジョブの登録前に一度ツイート機能を無効にしてデータベースを作成します．そのため，二回目以降の起動では以下の様にフラグを建てることでこれを回避出来ます．
 
 ### 二回目以降の起動
 
@@ -246,7 +238,7 @@ $ docker-compose up -d
 # 省略
 ```
 
-これにより最初の実行時からツイートが有効化されます．
+これにより最初のデータベース作成プロセスが省かれます．
 
 ## コンテナのビルド
 
