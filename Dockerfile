@@ -30,6 +30,6 @@ RUN pip3 install -r requirements.txt && \
     tzdata && \
     rm -rf /var/cache/apk/*
 
-ENTRYPOINT ["python3", "manage.py"]
+ENTRYPOINT ["sh", "cronjob.sh"]
 
 CMD ["-h"]
